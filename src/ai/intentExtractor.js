@@ -1,58 +1,59 @@
-import { getExtractionModel } from './aishwarya.js';
+import { getExtractionModel, getFallbackChatModel } from './aishwarya.js';
 import { logger } from '../utils/logger.js';
 
-// ============================================================
-// INTENT EXTRACTOR
-// Calls Gemini in extraction mode, returns structured intent object
-// ============================================================
-
 export async function extractIntent(userMessage, conversationHistory = []) {
-  try {
-    const model = getExtractionModel();
+  const contextStr = conversationHistory.slice(-4).map(t =>
+    `${t.role === 'user' ? 'User' : 'Aishwarya'}: ${t.content}`
+  ).join('\n');
 
-    // Include last 2 turns for context (slot carryover)
-    const contextStr = conversationHistory.slice(-4).map(t =>
-      `${t.role === 'user' ? 'User' : 'Aishwarya'}: ${t.content}`
-    ).join('\n');
+  const prompt = contextStr
+    ? `Previous context:\n${contextStr}\n\nNew message: ${userMessage}`
+    : userMessage;
 
-    const prompt = contextStr
-      ? `Previous context:\n${contextStr}\n\nNew message: ${userMessage}`
-      : userMessage;
+  // Try primary model first, fall back to stable model
+  for (const getModel of [getExtractionModel, getFallbackChatModel]) {
+    try {
+      const model = getModel();
+      const result = await model.generateContent(prompt);
+      const raw = result.response.text().trim();
 
-    const result = await model.generateContent(prompt);
-    const raw = result.response.text().trim();
+      // Strip accidental markdown
+      const cleaned = raw
+        .replace(/```json/g, '')
+        .replace(/```/g, '')
+        .trim();
 
-    // Strip any accidental markdown backticks
-    const cleaned = raw.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(cleaned);
+      const parsed = JSON.parse(cleaned);
 
-    logger.debug('Intent extracted', {
-      message: userMessage.substring(0, 80),
-      intent: parsed.intent,
-      confidence: parsed.confidence,
-      slots: parsed.slots,
-    });
+      logger.info('Intent extracted', {
+        intent: parsed.intent,
+        confidence: parsed.confidence,
+        language: parsed.language_detected,
+      });
 
-    return parsed;
-  } catch (err) {
-    logger.error('Intent extraction failed', { error: err.message });
-    // Safe fallback
-    return {
-      intent: 'off_topic',
-      confidence: 0,
-      category_filter: [],
-      slots: {},
-      missing_critical_slots: [],
-      requirement_summary: userMessage,
-      language_detected: 'english',
-    };
+      return parsed;
+    } catch (err) {
+      logger.error('Intent extraction attempt failed', {
+        error: err.message,
+        model: getModel.name,
+      });
+      // Try fallback model
+      continue;
+    }
   }
-}
 
-// ============================================================
-// SLOT MERGER
-// Merges new slots with existing partial slots from conversation state
-// ============================================================
+  // Both models failed — return safe default
+  logger.error('All intent extraction attempts failed — using fallback');
+  return {
+    intent: 'off_topic',
+    confidence: 0,
+    category_filter: [],
+    slots: {},
+    missing_critical_slots: [],
+    requirement_summary: userMessage,
+    language_detected: 'english',
+  };
+}
 
 export function mergeSlots(existingSlots = {}, newSlots = {}) {
   const merged = { ...existingSlots };
@@ -64,18 +65,13 @@ export function mergeSlots(existingSlots = {}, newSlots = {}) {
   return merged;
 }
 
-// ============================================================
-// CLARIFICATION QUESTION GENERATOR
-// Decides what single question to ask based on missing slots and intent
-// ============================================================
-
 const CLARIFICATION_QUESTIONS = {
   role: 'What specific role are you looking to fill?',
   skill: 'What specific skill or expertise do you need?',
   service_type: 'What type of service are you looking for exactly?',
   domain: 'Which domain or industry is this for?',
   budget_min: 'What is your approximate budget for this?',
-  location: 'Does the location matter, or are you open to remote as well?',
+  location: 'Does location matter, or are you open to remote?',
   timeline: 'When do you need this by?',
   industry: 'Which industry or sector is this for?',
   experience_years: 'How many years of experience are you looking for?',
@@ -83,38 +79,27 @@ const CLARIFICATION_QUESTIONS = {
   product_name: "What's the name of your product or startup?",
 };
 
-// Website type clarification for vague "need a website" requests
 const VAGUE_CLARIFICATIONS = {
   website: 'What kind of website? Business website, SaaS platform, ecommerce store, or portfolio?',
-  app: 'What kind of app? Mobile app (iOS/Android), web app, or both?',
-  marketing: 'What kind of marketing help? Social media, performance ads, SEO, content, or full-service?',
-  design: 'What kind of design work? UI/UX, branding, logo, or marketing creatives?',
+  app: 'What kind of app — mobile (iOS/Android), web app, or both?',
+  marketing: 'What kind of marketing? Social media, performance ads, SEO, content, or full-service?',
+  design: 'What kind of design? UI/UX, branding, logo, or marketing creatives?',
 };
 
 export function getClarificationQuestion(missingSlots, intent, requirementSummary) {
-  // Check if the requirement is vague and needs specific clarification
   const lowerSummary = requirementSummary?.toLowerCase() || '';
   for (const [keyword, question] of Object.entries(VAGUE_CLARIFICATIONS)) {
     if (lowerSummary.includes(keyword) && missingSlots.includes('service_type')) {
       return question;
     }
   }
-
-  // Return the first missing critical slot question
   for (const slot of missingSlots) {
     if (CLARIFICATION_QUESTIONS[slot]) {
       return CLARIFICATION_QUESTIONS[slot];
     }
   }
-
-  // Generic fallback
   return 'Could you share a bit more detail about what you need?';
 }
-
-// ============================================================
-// REGISTRATION SLOT COLLECTOR
-// Returns the next question to ask during profile registration
-// ============================================================
 
 const REGISTRATION_FIELDS = [
   { key: 'reg_name', question: "What's your name or your business name?" },
@@ -124,7 +109,7 @@ const REGISTRATION_FIELDS = [
   { key: 'reg_services', question: "List your top 3-5 services or skills (comma separated)." },
   { key: 'reg_industries', question: "Which industries do you typically work with? (e.g. SaaS, Fintech, D2C, Healthcare)" },
   { key: 'reg_location', question: "Which city are you based in?" },
-  { key: 'reg_pricing', question: "What is your pricing range? (e.g. ₹5,000–₹20,000 per project / ₹500/hour)" },
+  { key: 'reg_pricing', question: "What is your pricing range? (e.g. Rs.5,000-Rs.20,000 per project)" },
   { key: 'reg_website', question: "Share your website or portfolio link (or type 'skip' if you don't have one)." },
   { key: 'reg_whatsapp', question: "What WhatsApp number should interested people reach you on?" },
 ];
@@ -135,7 +120,7 @@ export function getNextRegistrationQuestion(partialSlots) {
       return { field: field.key, question: field.question };
     }
   }
-  return null; // All fields collected
+  return null;
 }
 
 const CATEGORY_MAP = {

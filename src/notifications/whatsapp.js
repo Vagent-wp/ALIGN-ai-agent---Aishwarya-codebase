@@ -2,23 +2,16 @@ import axios from 'axios';
 import { config } from '../../config/index.js';
 import { logger } from '../utils/logger.js';
 
-// ============================================================
-// WHATSAPP BUSINESS API — MESSAGE SENDER
-// ============================================================
-
-const WA_API_URL = `https://graph.facebook.com/${config.whatsapp.apiVersion}/${config.whatsapp.phoneNumberId}/messages`;
-
-function getHeaders() {
-  return {
-    Authorization: `Bearer ${config.whatsapp.accessToken}`,
-    'Content-Type': 'application/json',
-  };
-}
-
-// Core send function
 export async function sendWhatsAppMessage(to, text, retries = 3) {
-  // Normalize phone number — ensure it starts with country code, no +
-  const phone = to.replace(/\D/g, '');
+  // Normalize: strip all non-digits
+  let phone = to.replace(/\D/g, '');
+
+  // If Indian number without country code (10 digits starting with 6-9), add 91
+  if (phone.length === 10 && /^[6-9]/.test(phone)) {
+    phone = '91' + phone;
+  }
+
+  const url = `https://graph.facebook.com/${config.whatsapp.apiVersion}/${config.whatsapp.phoneNumberId}/messages`;
 
   const payload = {
     messaging_product: 'whatsapp',
@@ -31,15 +24,24 @@ export async function sendWhatsAppMessage(to, text, retries = 3) {
     },
   };
 
+  logger.info('Sending WhatsApp message', {
+    to: `***${phone.slice(-4)}`,
+    length: text.length,
+    url: url,
+  });
+
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
-      const response = await axios.post(WA_API_URL, payload, {
-        headers: getHeaders(),
-        timeout: 10000,
+      const response = await axios.post(url, payload, {
+        headers: {
+          Authorization: `Bearer ${config.whatsapp.accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 15000,
       });
 
-      logger.info('WhatsApp message sent', {
-        to: phone.slice(-4).padStart(phone.length, '*'), // mask number in logs
+      logger.info('WhatsApp message sent successfully', {
+        to: `***${phone.slice(-4)}`,
         messageId: response.data?.messages?.[0]?.id,
       });
 
@@ -52,14 +54,21 @@ export async function sendWhatsAppMessage(to, text, retries = 3) {
         attempt,
         status,
         error: errData?.error?.message || err.message,
+        code: errData?.error?.code,
+        details: JSON.stringify(errData || {}),
+        phone: `***${phone.slice(-4)}`,
       });
 
-      // Don't retry on auth errors or invalid number
-      if (status === 401 || status === 400) break;
+      // Don't retry on auth or bad request errors
+      if (status === 401 || status === 400) {
+        logger.error('Non-retryable error — stopping', { status });
+        break;
+      }
 
-      // Exponential backoff
       if (attempt < retries) {
-        await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt)));
+        const delay = 1000 * attempt;
+        logger.info(`Retrying in ${delay}ms...`);
+        await new Promise(r => setTimeout(r, delay));
       }
     }
   }
@@ -67,29 +76,21 @@ export async function sendWhatsAppMessage(to, text, retries = 3) {
   return null;
 }
 
-// Send typing indicator (shows "typing..." in WhatsApp)
-export async function sendTypingIndicator(to) {
-  const phone = to.replace(/\D/g, '');
-  try {
-    await axios.post(WA_API_URL.replace('/messages', '/messages'), {
-      messaging_product: 'whatsapp',
-      status: 'read',
-      message_id: 'placeholder',
-    }, { headers: getHeaders() });
-  } catch {
-    // Non-critical, ignore
-  }
-}
-
-// Mark message as read
 export async function markAsRead(messageId) {
   try {
-    await axios.post(WA_API_URL.replace('/messages', '/messages'), {
+    const url = `https://graph.facebook.com/${config.whatsapp.apiVersion}/${config.whatsapp.phoneNumberId}/messages`;
+    await axios.post(url, {
       messaging_product: 'whatsapp',
       status: 'read',
       message_id: messageId,
-    }, { headers: getHeaders() });
+    }, {
+      headers: {
+        Authorization: `Bearer ${config.whatsapp.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      timeout: 5000,
+    });
   } catch {
-    // Non-critical, ignore
+    // Non-critical
   }
 }
