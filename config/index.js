@@ -28,7 +28,7 @@ export const config = {
     businessAccountId: required('WHATSAPP_BUSINESS_ACCOUNT_ID'),
     verifyToken: required('WHATSAPP_VERIFY_TOKEN'),
     appSecret: required('WHATSAPP_APP_SECRET'),
-    apiVersion: 'v21.0',
+    apiVersion: process.env.WHATSAPP_API_VERSION || 'v25.0',
     get apiBase() {
       return `https://graph.facebook.com/${this.apiVersion}/${this.phoneNumberId}`;
     },
