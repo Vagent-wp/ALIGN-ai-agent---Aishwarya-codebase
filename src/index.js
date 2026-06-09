@@ -9,19 +9,15 @@ import { apiLimiter } from './middleware/rateLimiter.js';
 import { verifyWebhook, receiveWebhook } from './webhook/webhookHandler.js';
 
 // ============================================================
-// CATCH ALL UNHANDLED ERRORS — prevents silent crashes
+// CATCH ALL UNHANDLED ERRORS
 // ============================================================
 
 process.on('uncaughtException', (err) => {
-  console.error('UNCAUGHT EXCEPTION:', err.message);
-  console.error(err.stack);
-  // Don't exit — keep server alive and log the error
+  console.error('UNCAUGHT EXCEPTION:', err.message, err.stack);
 });
 
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('UNHANDLED REJECTION at:', promise);
-  console.error('Reason:', reason);
-  // Don't exit — keep server alive
+process.on('unhandledRejection', (reason) => {
+  console.error('UNHANDLED REJECTION:', reason);
 });
 
 const app = express();
@@ -33,17 +29,16 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 
-// Capture raw body for Meta signature verification BEFORE json parser
-app.use((req, res, next) => {
-  let data = Buffer.alloc(0);
-  req.on('data', chunk => { data = Buffer.concat([data, chunk]); });
-  req.on('end', () => {
-    req.rawBody = data.toString('utf8');
-    next();
-  });
-});
+// *** THE FIX ***
+// Use express.json's built-in verify callback to capture raw body.
+// A separate middleware consumed the stream BEFORE json() could read it,
+// causing "stream is not readable". This approach reads it once only.
+app.use(express.json({
+  verify: (req, res, buf) => {
+    req.rawBody = buf.toString('utf8');
+  },
+}));
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (config.server.isDev) {
@@ -60,7 +55,6 @@ app.use('/api', apiLimiter);
 // ROUTES
 // ============================================================
 
-// Health check — Railway uses this
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
@@ -74,7 +68,7 @@ app.get('/health', (req, res) => {
 app.get('/webhook/whatsapp', verifyWebhook);
 app.post('/webhook/whatsapp', receiveWebhook);
 
-// Debug route — shows which env vars are loaded (values masked)
+// Debug — env check
 app.get('/debug/env', (req, res) => {
   res.json({
     SUPABASE_URL: process.env.SUPABASE_URL ? '✓ set' : '✗ MISSING',
@@ -91,7 +85,6 @@ app.get('/debug/env', (req, res) => {
   });
 });
 
-// Internal API status
 app.get('/api/status', (req, res) => {
   res.json({ status: 'running', agent: config.agent.name });
 });
@@ -121,7 +114,6 @@ const server = app.listen(config.server.port, () => {
   });
 });
 
-// Keep alive — prevent Railway from timing out idle connections
 server.keepAliveTimeout = 120000;
 server.headersTimeout = 120000;
 
