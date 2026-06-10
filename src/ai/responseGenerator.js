@@ -44,9 +44,9 @@ export const Messages = {
 
   greeting(name = null) {
     const greeting = name ? `Hi ${name}! 👋` : 'Hi there! 👋';
-    return `${greeting} I'm Aishwarya, your startup ecosystem matchmaker at StartupHub.
+    return `${greeting} I'm Aishwarya, your matchmaker on ALIGN Network.
 
-I help founders, builders, and creators find exactly who they need — whether that's a co-founder, a designer, a legal expert, a marketing agency, a mentor, or anything in between.
+I help founders, builders, job seekers, students, investors, manufacturers, and creators find exactly who they need — whether that's a co-founder, a designer, a mentor, an investor, or a manufacturer.
 
 What are you looking for today?`;
   },
@@ -69,7 +69,7 @@ What are you looking for today?`;
     return 'Perfect. Let me find the right people for you... ⚡';
   },
 
-  matchesFound(matches, requirementSummary, language = 'english') {
+  matchesFound(matches, requirementSummary, language = 'english', searchSlots = {}) {
     const intro = language === 'hinglish'
       ? `Great news! "${requirementSummary}" ke liye mujhe kuch excellent options mile hain:\n\n`
       : `I found some excellent matches for "${requirementSummary}":\n\n`;
@@ -78,7 +78,15 @@ What are you looking for today?`;
       const location = m.location_city ? ` • ${m.location_city}` : '';
       const verified = m.verification_tier === 'identity_verified' ? ' ✓' : '';
       const premium = m.is_premium ? ' ⭐' : '';
-      return `${i + 1}. *${m.name}*${verified}${premium}\n${m.tagline || m.description?.substring(0, 80) + '...'}${location}`;
+      const headline = m.headline || m.tagline || (m.description ? `${m.description.substring(0, 80)}...` : '');
+      const expertise = m.domain_expertise?.length
+        ? `\nExpertise: ${m.domain_expertise.slice(0, 2).join(', ')}`
+        : '';
+      const openToBadges = buildOpenToBadges(m, searchSlots);
+      const completeness = m.profile_completeness != null
+        ? `\nProfile: ${m.profile_completeness}% complete`
+        : '';
+      return `${i + 1}. *${m.display_name || m.name}*${verified}${premium}\n${headline}${expertise}${openToBadges}${location}${completeness}`;
     }).join('\n\n');
 
     const outro = language === 'hinglish'
@@ -139,7 +147,7 @@ Is there anything else I can help you with?`;
   },
 
   leadNotificationToProvider(lead, seekerRequirement) {
-    return `Hello! 👋 This is Aishwarya from StartupHub.
+    return `Hello! 👋 This is Aishwarya from ALIGN Network.
 
 You have a new lead that matches your profile:
 
@@ -169,15 +177,15 @@ All the best! 🚀`;
 
   registrationStart(language = 'english') {
     if (language === 'hinglish') {
-      return `Bahut badhiya! Main aapka profile StartupHub pe list kar deti hoon.
+      return `Bahut badhiya! Main aapka profile ALIGN Network pe list kar deti hoon.
 
 Bas kuch details chahiye — simple questions hain, ek ek karke. Ready?
 
 Pehle bataiye — aapka naam kya hai ya aapke business ka naam kya hai?`;
     }
-    return `Let's get you listed on StartupHub! 🎉
+    return `Let's get you listed on ALIGN Network! 🎉
 
-I'll collect a few details — it'll only take a couple of minutes.
+I'll collect a few details — it'll only take a couple of minutes. We support 35 profile types — from founders and freelancers to job seekers, students, manufacturers, and investors.
 
 First — what's your name or your business name?`;
   },
@@ -187,9 +195,9 @@ First — what's your name or your business name?`;
 
 It's currently under review — we'll activate it within 24 hours after a quick verification check.
 
-Once it's live, you'll start receiving relevant leads directly on WhatsApp.
+Complete your full profile at align.network to boost your visibility — full profiles get 5x more leads.
 
-Welcome to StartupHub! 🚀`;
+Welcome to ALIGN Network! 🚀`;
   },
 
   providerNotifyConnect(seekerPhone) {
@@ -226,6 +234,29 @@ What would you like to do?`;
     return `I ran into a small issue on my end. Please try again in a moment — I'm here and ready to help.`;
   },
 
+  profileTypePrompt(language = 'english') {
+    const types = `1. Founder / Startup
+2. Freelancer
+3. Agency
+4. Developer / Engineer
+5. Designer
+6. Consultant
+7. Mentor
+8. Investor
+9. Job Seeker
+10. Student / Intern
+11. Service Provider
+12. Manufacturer / Vendor
+13. Creator / Influencer
+14. Recruiter / HR
+15. Other Professional`;
+
+    if (language === 'hinglish') {
+      return `Aap kis category mein aate hain?\n\n${types}\n\nNumber reply karein.`;
+    }
+    return `Which category best describes you?\n\n${types}\n\nJust reply with the number.`;
+  },
+
   offTopic(language = 'english') {
     if (language === 'hinglish') {
       return `Yeh meri expertise se thoda bahar hai! Main startup ecosystem ke liye hun — finding the right people, opportunities, and resources.
@@ -237,3 +268,21 @@ Kuch aur chahiye? Koi co-founder, agency, freelancer, mentor?`;
 Is there something along those lines I can help you with?`;
   },
 };
+
+function buildOpenToBadges(profile, searchSlots = {}) {
+  const badges = [];
+  const openTo = searchSlots.open_to;
+
+  if (openTo === 'mentorship' && profile.open_to_mentorship) badges.push('Open to mentorship');
+  if (openTo === 'investment' && profile.open_to_investment) badges.push('Open to investment');
+  if (openTo === 'cofounder' && profile.open_to_cofounder) badges.push('Open to co-founder');
+  if (openTo === 'hiring' && profile.open_to_hiring) badges.push('Open to hiring');
+
+  if (!openTo) {
+    if (profile.open_to_mentorship) badges.push('Open to mentorship');
+    if (profile.open_to_investment) badges.push('Open to investment');
+    if (profile.open_to_cofounder) badges.push('Open to co-founder');
+  }
+
+  return badges.length ? `\n${badges.join(' • ')}` : '';
+}

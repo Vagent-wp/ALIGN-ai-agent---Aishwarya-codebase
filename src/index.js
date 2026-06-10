@@ -7,6 +7,7 @@ import { config } from '../config/index.js';
 import { logger } from './utils/logger.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { verifyWebhook, receiveWebhook } from './webhook/webhookHandler.js';
+import onboardingApi from './routes/onboardingApi.js';
 
 // ============================================================
 // CATCH ALL UNHANDLED ERRORS
@@ -88,6 +89,8 @@ app.get('/debug/env', (req, res) => {
 app.get('/api/status', (req, res) => {
   res.json({ status: 'running', agent: config.agent.name });
 });
+
+app.use('/api/onboarding', onboardingApi);
 
 // ============================================================
 // 404 & ERROR HANDLERS

@@ -16,6 +16,7 @@ const config: Config = {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         brand: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
+        poppins: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -74,12 +75,33 @@ const config: Config = {
           from: { transform: 'translateX(-100%)' },
           to: { transform: 'translateX(0)' },
         },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+        'plasma-drift-1': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%': { transform: 'translate(8%, -6%) scale(1.05)' },
+          '66%': { transform: 'translate(-5%, 4%) scale(0.95)' },
+        },
+        'plasma-drift-2': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '50%': { transform: 'translate(-10%, 8%) scale(1.08)' },
+        },
+        'cursor-blink': {
+          '0%, 49%': { opacity: '1' },
+          '50%, 100%': { opacity: '0' },
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'fade-in': 'fade-in 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'slide-up': 'slide-up 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'slide-in-left': 'slide-in-left 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        marquee: 'marquee 32s linear infinite',
+        'plasma-drift-1': 'plasma-drift-1 22s ease-in-out infinite',
+        'plasma-drift-2': 'plasma-drift-2 18s ease-in-out infinite',
+        'cursor-blink': 'cursor-blink 1s step-end infinite',
       },
     },
   },

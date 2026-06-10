@@ -8,6 +8,9 @@ import { TermsPage } from '@/pages/TermsPage';
 import { ContactPage } from '@/pages/ContactPage';
 import { EarlyAccessPage } from '@/pages/EarlyAccessPage';
 import { ThankYouPage } from '@/pages/ThankYouPage';
+import { ProjectsPage } from '@/pages/ProjectsPage';
+import { ProjectDashboardPage } from '@/pages/ProjectDashboardPage';
+import { OnboardingPage } from '@/pages/OnboardingPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 export function AppRoutes() {
@@ -19,14 +22,17 @@ export function AppRoutes() {
         <Route path="privacy" element={<PrivacyPage />} />
         <Route path="terms" element={<TermsPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
+        <Route path="projects/:slug" element={<ProjectDashboardPage />} />
         <Route path="thank-you" element={<ThankYouPage />} />
       </Route>
 
       {/* Wizard — full viewport, no public footer */}
       <Route path="early-access" element={<EarlyAccessPage />} />
 
-      {/* Future-ready dashboard shell */}
-      <Route path="dashboard" element={<DashboardLayout />} />
+      <Route path="dashboard" element={<DashboardLayout />}>
+        <Route path="onboarding" element={<OnboardingPage />} />
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -5,7 +5,7 @@ import { BRAND, LOGO } from '@/lib/brand';
 interface AlignBrandProps {
   /** Full wordmark image or icon-only mark */
   variant?: 'full' | 'icon';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'nav';
   /** Show official expansion below logo (full variant only) */
   showExpansion?: boolean;
   /** Show platform + assistant line below logo */
@@ -18,12 +18,14 @@ const fullHeights = {
   sm: 'h-8 md:h-9',
   md: 'h-10 md:h-11',
   lg: 'h-12 md:h-16 lg:h-[4.5rem]',
+  nav: 'h-12 w-auto sm:h-14 md:h-16 lg:h-[4.25rem]',
 };
 
 const iconSizes = {
   sm: 'h-8 w-8',
   md: 'h-10 w-10',
   lg: 'h-12 w-12',
+  nav: 'h-10 w-10 sm:h-11 sm:w-11',
 };
 
 export function AlignBrand({
@@ -46,7 +48,10 @@ export function AlignBrand({
         <img
           src={LOGO.full}
           alt={`${BRAND.company} — ${BRAND.platform}`}
-          className={cn('w-auto max-w-full object-contain object-left', fullHeights[size])}
+          className={cn(
+            'w-auto max-w-[min(100%,240px)] object-contain object-left sm:max-w-[280px] md:max-w-none',
+            fullHeights[size]
+          )}
         />
       )}
 

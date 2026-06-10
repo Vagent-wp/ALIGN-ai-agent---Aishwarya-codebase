@@ -83,9 +83,13 @@ async function handleNewMessage(session, messageText, user, phoneHash, fromPhone
   const intentData = await extractIntent(messageText, session.turn_history);
   const { intent, confidence, category_filter, slots, missing_critical_slots, requirement_summary, language_detected } = intentData;
 
-  // Store detected language in session
   session.partial_slots = mergeSlots(session.partial_slots || {}, slots);
+  session.partial_slots._language = language_detected;
   session.intent = intent;
+
+  if (language_detected) {
+    await getOrCreateUser(fromPhone, 'seeker', language_detected);
+  }
 
   logger.debug('Intent detected', { intent, confidence, missing: missing_critical_slots });
 
@@ -227,14 +231,13 @@ Is there anything else you need?`;
 async function handleRegistration(session, messageText, user, phoneHash) {
   const slots = session.partial_slots || {};
 
-  // Process category number mapping
-  if (slots._awaiting_category) {
+  if (slots._awaiting_profile_type) {
     const mapped = mapCategoryInput(messageText);
+    slots.reg_profile_type = mapped;
     slots.reg_category = mapped;
-    delete slots._awaiting_category;
+    delete slots._awaiting_profile_type;
     session.partial_slots = slots;
   } else {
-    // Get the last asked field and store the answer
     const lastField = slots._last_reg_field;
     if (lastField) {
       slots[lastField] = messageText.trim();
@@ -243,13 +246,12 @@ async function handleRegistration(session, messageText, user, phoneHash) {
     }
   }
 
-  // Get next question
   const next = getNextRegistrationQuestion(slots);
 
   if (next) {
     session.partial_slots._last_reg_field = next.field;
-    if (next.field === 'reg_category') {
-      session.partial_slots._awaiting_category = true;
+    if (next.field === 'reg_profile_type') {
+      session.partial_slots._awaiting_profile_type = true;
     }
     return next.question;
   }
@@ -313,7 +315,7 @@ async function performSearch(session, user, phoneHash, language, requirementSumm
   session.clarification_count = 0;
   session.current_lead_id = lead?.id || null;
 
-  return Messages.matchesFound(shownMatches, requirementSummary, language);
+  return Messages.matchesFound(shownMatches, requirementSummary, language, session.partial_slots || {});
 }
 
 // ============================================================

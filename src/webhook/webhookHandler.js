@@ -144,7 +144,7 @@ async function handleIncomingMessage(message, value) {
     });
     await sendWhatsAppMessage(
       fromPhone,
-      `Hi! I'm Aishwarya from StartupHub. I ran into a small issue — please try again in a moment!`
+      `Hi! I'm Aishwarya from ALIGN Network. I ran into a small issue — please try again in a moment!`
     ).catch(() => {});
   }
 }
