@@ -30,8 +30,26 @@ export function InvisiblePlatformShowcase() {
           <span className="inv-accent-blue">scale with intelligence.</span>
         </h2>
 
-        <div className="mt-14 grid items-start gap-12 lg:grid-cols-[minmax(280px,380px)_1fr] lg:gap-16">
-          <div role="tablist" aria-label="Platform capabilities">
+        <div className="mt-10 grid items-start gap-8 sm:mt-14 sm:gap-12 lg:grid-cols-[minmax(280px,380px)_1fr] lg:gap-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active.id}
+              className="order-1 lg:order-2"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <RichMockupStage
+                mockupId={active.mockupId}
+                variant={active.stageVariant}
+                tilt
+                className="min-h-[220px] sm:min-h-[300px] lg:min-h-[440px]"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="order-2 lg:order-1" role="tablist" aria-label="Platform capabilities">
             {platformShowcaseItems.map((item, index) => {
               const isActive = index === activeIndex;
               const Icon = item.icon;
@@ -81,23 +99,6 @@ export function InvisiblePlatformShowcase() {
               );
             })}
           </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <RichMockupStage
-                mockupId={active.mockupId}
-                variant={active.stageVariant}
-                tilt
-                className="min-h-[380px] lg:min-h-[440px]"
-              />
-            </motion.div>
-          </AnimatePresence>
         </div>
       </div>
     </section>

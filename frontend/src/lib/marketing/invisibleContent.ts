@@ -111,6 +111,11 @@ export interface NetworkShowcaseItem {
   tab: string;
   query: string;
   results: { name: string; meta: string }[];
+  /** AI-parsed intent chips shown beside the live query */
+  signals: string[];
+  matchScore: number;
+  scanTime: string;
+  nodesScanned: string;
 }
 
 export const networkShowcaseItems: NetworkShowcaseItem[] = [
@@ -118,6 +123,10 @@ export const networkShowcaseItems: NetworkShowcaseItem[] = [
     id: 'founders',
     tab: 'Founders',
     query: 'Fintech founders in Pune building B2B SaaS',
+    signals: ['Fintech', 'Pune', 'B2B SaaS'],
+    matchScore: 96,
+    scanTime: '0.3s',
+    nodesScanned: '1.8k',
     results: [
       { name: 'Arjun Mehta', meta: 'CEO · PayFlow · Seed stage' },
       { name: 'Sneha Kulkarni', meta: 'Co-founder · LedgerX · Series A' },
@@ -128,6 +137,10 @@ export const networkShowcaseItems: NetworkShowcaseItem[] = [
     id: 'agencies',
     tab: 'Agencies',
     query: 'UI/UX agencies with healthcare portfolio',
+    signals: ['Healthcare', 'UI/UX', 'Portfolio'],
+    matchScore: 93,
+    scanTime: '0.4s',
+    nodesScanned: '2.1k',
     results: [
       { name: 'Studio Meridian', meta: '12 healthcare projects · 4.9 rating' },
       { name: 'Pixel & Pulse', meta: 'FDA-compliant design systems' },
@@ -138,6 +151,10 @@ export const networkShowcaseItems: NetworkShowcaseItem[] = [
     id: 'investors',
     tab: 'Investors',
     query: 'Angels investing in AI automation startups',
+    signals: ['AI', 'Automation', 'Angels'],
+    matchScore: 91,
+    scanTime: '0.5s',
+    nodesScanned: '940',
     results: [
       { name: 'Priya Shah', meta: 'Angel · 8 AI portfolio cos' },
       { name: 'Westbridge Capital', meta: 'Pre-seed to Series A' },
@@ -148,6 +165,10 @@ export const networkShowcaseItems: NetworkShowcaseItem[] = [
     id: 'services',
     tab: 'Services',
     query: 'Dev shops building multi-tenant SaaS platforms',
+    signals: ['Multi-tenant', 'SaaS', 'Dev shops'],
+    matchScore: 94,
+    scanTime: '0.4s',
+    nodesScanned: '2.4k',
     results: [
       { name: 'ALIGN Agent Labs', meta: '13 service categories' },
       { name: 'CloudForge India', meta: 'Enterprise SaaS · 40+ engineers' },

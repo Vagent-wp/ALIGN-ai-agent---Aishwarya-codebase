@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { InvLabel, TwoToneHeadline } from '@/components/marketing/invisible/Editorial';
+import { useHashSection } from '@/hooks/useHashSection';
 import { industries } from '@/lib/marketing/content';
 import { cn } from '@/lib/utils';
 
@@ -8,26 +8,23 @@ interface IndustriesSectionProps {
   standalone?: boolean;
 }
 
-export function IndustriesSection({ standalone = false }: IndustriesSectionProps) {
-  const [activeId, setActiveId] = useState(industries[0]?.id ?? '');
+const INDUSTRY_IDS = industries.map((i) => i.id);
 
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && industries.some((i) => i.id === hash)) {
-      setActiveId(hash);
-      window.setTimeout(() => {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
-  }, []);
+export function IndustriesSection({ standalone = false }: IndustriesSectionProps) {
+  const { activeId, selectSection } = useHashSection(
+    INDUSTRY_IDS,
+    industries[0]?.id ?? '',
+    { pagePath: '/industries' },
+  );
 
   const active = industries.find((i) => i.id === activeId) ?? industries[0];
 
   const selectIndustry = (id: string) => {
-    setActiveId(id);
     if (standalone) {
-      window.history.replaceState(null, '', `/industries#${id}`);
+      selectSection(id, '/industries');
+      return;
     }
+    selectSection(id, window.location.pathname);
   };
 
   return (
@@ -47,7 +44,12 @@ export function IndustriesSection({ standalone = false }: IndustriesSectionProps
           </>
         )}
 
-        <div className={cn('flex flex-wrap justify-center gap-2 sm:gap-3', !standalone && 'mt-10')}>
+        <div
+          className={cn(
+            'grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3',
+            !standalone && 'mt-8 sm:mt-10'
+          )}
+        >
           {industries.map((ind) => (
             <button
               key={ind.id}
@@ -74,17 +76,17 @@ export function IndustriesSection({ standalone = false }: IndustriesSectionProps
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="inv-card mx-auto mt-10 max-w-2xl scroll-mt-28 p-8 text-center"
+              className="inv-card mx-auto mt-8 max-w-2xl scroll-mt-28 p-5 text-center sm:mt-10 sm:p-8"
             >
               <h3 className="inv-heading !text-2xl sm:!text-3xl">{active.title}</h3>
               <p className="inv-label mt-3 justify-center">Projects delivered</p>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-6 grid grid-cols-2 gap-2 sm:gap-3">
                 {active.projects.map((project) => (
                   <li
                     key={project}
-                    className="inv-card !border-[var(--color-ash)] !bg-[var(--color-mist)]/50 !p-4 text-sm font-medium"
+                    className="inv-card flex min-h-[72px] items-center !border-[var(--color-ash)] !bg-[var(--color-mist)]/50 !p-3 text-sm font-medium sm:min-h-0 sm:!p-4"
                   >
-                    {project}
+                    <span className="line-clamp-2">{project}</span>
                   </li>
                 ))}
               </ul>

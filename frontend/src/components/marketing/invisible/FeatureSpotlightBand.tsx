@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { InvLabel } from '@/components/marketing/invisible/Editorial';
+import { ClampReadMore } from '@/components/marketing/invisible/ClampReadMore';
 import { RichMockupStage } from '@/components/marketing/invisible/RichMockupStage';
 import type { MockupAssetId } from '@/lib/marketing/visualAssets';
 
@@ -61,18 +62,26 @@ function SpotlightCard({ item }: { item: SpotlightItem }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`inv-feature-band ${bandClass} flex h-full flex-col`}
+      className={`inv-feature-band inv-grid-card ${bandClass} flex h-full flex-col`}
     >
-      <RichMockupStage
-        mockupId={item.mockupId}
-        variant={item.stageVariant}
-        tilt
-        className="!min-h-[200px] shrink-0 !p-4"
-      />
-      <div className="mt-6 flex flex-1 flex-col">
-        <h3 className="inv-heading-lg !text-[clamp(1.125rem,1.8vw,1.5rem)]">{item.title}</h3>
-        <p className="inv-body mt-3 flex-1">{item.description}</p>
-        <Link to={item.cta.href} className="inv-btn-outline-blue mt-6 inline-flex self-start">
+      <div className="inv-spotlight-mock shrink-0 overflow-hidden rounded-2xl">
+        <RichMockupStage
+          mockupId={item.mockupId}
+          variant={item.stageVariant}
+          tilt
+          className="!h-full !min-h-0 !p-2 sm:!p-4"
+        />
+      </div>
+      <div className="mt-3 flex min-h-0 flex-1 flex-col sm:mt-5">
+        <h3 className="inv-heading-lg line-clamp-2 !text-[clamp(0.95rem,2.5vw,1.5rem)]">{item.title}</h3>
+        <ClampReadMore
+          text={item.description}
+          className="inv-body mt-2 text-[13px] sm:mt-3 sm:text-base"
+        />
+        <Link
+          to={item.cta.href}
+          className="inv-btn-outline-blue mt-3 inline-flex self-start text-[12px] sm:mt-4 sm:text-sm lg:mt-auto"
+        >
           {item.cta.label}
           <span aria-hidden>→</span>
         </Link>
@@ -93,7 +102,7 @@ export function FeatureSpotlightBand() {
           {' '}— not empty.
         </h2>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-5 lg:gap-6">
+        <div className="mt-10 grid auto-rows-fr grid-cols-2 items-stretch gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-3 lg:gap-6">
           {spotlightItems.map((item) => (
             <SpotlightCard key={item.id} item={item} />
           ))}

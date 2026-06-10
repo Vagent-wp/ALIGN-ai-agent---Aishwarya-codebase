@@ -1,11 +1,17 @@
 /* Echo — floating website assistant */
 
 .echo-widget-root {
+  --echo-peek: 56px;
   position: fixed;
   right: max(16px, env(safe-area-inset-right));
   bottom: max(16px, env(safe-area-inset-bottom));
   z-index: 400;
   pointer-events: none;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.echo-widget-root--docked {
+  transform: translateX(calc(100% - var(--echo-peek)));
 }
 
 .echo-widget-root > * {
@@ -17,20 +23,148 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.echo-mascot-wrap:active {
+  cursor: grabbing;
 }
 
 .echo-teaser-slot {
+  position: relative;
   align-self: flex-end;
-  margin-right: 56px;
+  margin-right: 84px;
+  width: 240px;
   min-height: 58px;
   display: flex;
   align-items: flex-end;
+  overflow: visible;
+}
+
+/* Docked — intermittent dot · dot · circle peek beside waving mascot */
+.echo-hidden-peek-slot {
+  position: relative;
+  align-self: flex-end;
+  margin-right: 46px;
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.echo-hidden-peek {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.echo-hidden-trail {
+  position: relative;
+  width: 34px;
+  height: 26px;
+  margin-right: 6px;
+  margin-bottom: 1px;
+}
+
+.echo-hidden-trail-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #c5ddf5;
+  box-shadow: 0 1px 3px rgba(49, 130, 206, 0.12);
+}
+
+.echo-hidden-trail-dot--sm {
+  right: 0;
+  bottom: 0;
+  width: 5px;
+  height: 5px;
+}
+
+.echo-hidden-trail-dot--md {
+  right: 11px;
+  bottom: 11px;
+  width: 8px;
+  height: 8px;
+}
+
+.echo-hidden-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #d4e8ff;
+  box-shadow:
+    0 3px 14px rgba(49, 130, 206, 0.1),
+    0 1px 2px rgba(6, 27, 49, 0.05);
+}
+
+.echo-hidden-bubble-text {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #64748d;
+}
+
+/* Thought bubbles — small · medium · large from Echo mascot up to the card */
+.echo-thought-trail {
+  position: absolute;
+  right: -6px;
+  bottom: -46px;
+  z-index: 0;
+  width: 52px;
+  height: 52px;
+  pointer-events: none;
+}
+
+.echo-thought-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #c5ddf5;
+  box-shadow: 0 1px 4px rgba(49, 130, 206, 0.14);
+}
+
+.echo-thought-dot--sm {
+  right: 2px;
+  bottom: 0;
+  width: 5px;
+  height: 5px;
+}
+
+.echo-thought-dot--md {
+  right: 14px;
+  bottom: 14px;
+  width: 8px;
+  height: 8px;
+}
+
+.echo-thought-dot--lg {
+  right: 26px;
+  bottom: 30px;
+  width: 12px;
+  height: 12px;
 }
 
 .echo-teaser {
-  max-width: 240px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 58px;
+  box-sizing: border-box;
   padding: 12px 16px;
-  border-radius: 16px 16px 4px 16px;
+  border-radius: 16px 16px 8px 16px;
   background: #ffffff;
   border: 1px solid #d4e8ff;
   box-shadow:
@@ -53,7 +187,12 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.45;
+  min-height: calc(13px * 1.45);
   color: #061b31;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .echo-teaser-ellipsis {
@@ -95,6 +234,20 @@
   object-fit: contain;
   animation: echo-float 3.2s ease-in-out infinite;
   filter: drop-shadow(0 8px 16px rgba(6, 27, 49, 0.12));
+}
+
+.echo-mascot-img--wave {
+  animation: echo-wave-peek 2.2s ease-in-out infinite;
+}
+
+@keyframes echo-wave-peek {
+  0%,
+  100% {
+    transform: rotate(-10deg) translateX(-3px);
+  }
+  50% {
+    transform: rotate(10deg) translateX(3px);
+  }
 }
 
 @keyframes echo-float {
@@ -294,12 +447,34 @@
   }
 
   .echo-teaser-slot {
-    margin-right: 44px;
-    max-width: calc(100vw - 120px);
+    margin-right: 64px;
+    width: min(240px, calc(100vw - 120px));
   }
 
-  .echo-teaser {
-    max-width: min(220px, calc(100vw - 120px));
+  .echo-thought-trail {
+    right: -4px;
+    bottom: -40px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .echo-thought-dot--md {
+    right: 12px;
+    bottom: 12px;
+    width: 7px;
+    height: 7px;
+  }
+
+  .echo-thought-dot--lg {
+    right: 22px;
+    bottom: 26px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .echo-teaser-text {
+    font-size: 12px;
+    min-height: calc(12px * 1.45);
   }
 
   .echo-mascot-img {

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { AlignBrand } from '@/components/brand/AlignBrand';
 import { MarketingNavMegaMenu } from '@/components/marketing/MarketingNavMegaMenu';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { navMegaMenus, simpleNavLinks } from '@/lib/marketing/navContent';
 import { MARKETING_NAV_HEIGHT } from '@/lib/marketing/navHeight';
 import { cn } from '@/lib/utils';
@@ -13,7 +12,6 @@ export function MarketingNavbar() {
   const [open, setOpen] = useState(false);
   const [activeMega, setActiveMega] = useState<string | null>(null);
   const location = useLocation();
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -27,22 +25,32 @@ export function MarketingNavbar() {
     setOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 1024px)');
+    const onChange = () => {
+      if (mql.matches) setOpen(false);
+    };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
   const isActive = (path: string) =>
     path === '/' ? location.pathname === '/' : location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   return (
     <>
-      <header className={cn('fixed inset-x-0 top-0 z-[200] linear-nav overflow-visible pt-safe')}>
-        <div
-          className={cn(
-            'marketing-container flex items-center justify-between gap-4 overflow-visible px-6',
-            MARKETING_NAV_HEIGHT.bar
-          )}
-        >
-          <AlignBrand variant="full" size="nav" surface="light" />
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-[200] linear-nav flex overflow-visible pt-safe',
+          MARKETING_NAV_HEIGHT.bar
+        )}
+      >
+        <div className="marketing-container flex h-full w-full items-center justify-between gap-4 overflow-visible px-4 sm:px-6">
+          <div className="flex h-full shrink-0 items-center">
+            <AlignBrand variant="full" size="nav" surface="light" />
+          </div>
 
-          {!isMobile && (
-            <nav className="relative hidden items-center gap-0.5 overflow-visible lg:flex">
+          <nav className="relative hidden h-full items-center gap-0.5 overflow-visible lg:flex">
               <Link to="/" className="linear-nav-link" data-active={isActive('/') ? 'true' : 'false'}>
                 Home
               </Link>
@@ -72,25 +80,23 @@ export function MarketingNavbar() {
                 Join Network
               </Link>
             </nav>
-          )}
 
-          {isMobile && (
-            <button
-              type="button"
-              className="touch-target flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-carbon-ink)] hover:bg-[var(--color-mist)] lg:hidden"
-              onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
-            >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          )}
+          <button
+            type="button"
+            className="touch-target flex h-10 w-10 shrink-0 items-center justify-center self-center rounded-full text-[var(--color-carbon-ink)] hover:bg-[var(--color-mist)] lg:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </header>
 
       <div className={MARKETING_NAV_HEIGHT.spacer} aria-hidden />
 
       <AnimatePresence>
-        {isMobile && open && (
+        {open && (
           <motion.nav
             className={cn(
               'fixed inset-0 z-[210] overflow-y-auto bg-[var(--color-canvas-white)] lg:hidden',

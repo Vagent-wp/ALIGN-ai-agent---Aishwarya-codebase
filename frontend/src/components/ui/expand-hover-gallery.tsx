@@ -109,7 +109,7 @@ export function ExpandHoverGallerySection({
       className={cn('inv-section scroll-mt-24 bg-[var(--color-align-lavender)]/40', className)}
     >
       <div className="inv-container">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
+        <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10">
           <p className="inv-label justify-center">
             <span className="inv-label-dot" aria-hidden />
             Our work

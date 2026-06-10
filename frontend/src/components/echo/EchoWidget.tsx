@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
+import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
 import { Send, X, Minus } from 'lucide-react';
 import { EchoTeaser } from '@/components/echo/EchoTeaser';
 import { sendEchoMessage, type EchoMessage } from '@/lib/echo/api';
@@ -8,6 +8,10 @@ import { LOGO } from '@/lib/brand';
 import { cn } from '@/lib/utils';
 
 type Phase = 'awaiting_name' | 'chat';
+
+const SWIPE_HIDE_OFFSET = 56;
+const SWIPE_HIDE_THRESHOLD = 48;
+const SWIPE_SHOW_THRESHOLD = 32;
 
 function greetingForName(name: string): string {
   return `Lovely to meet you, ${name}! I'm here to help you explore ALIGN Ecosystems — our services, industries, projects, and how to join ${name === 'there' ? 'the network' : 'ALIGN Network'}. What would you like to know?`;
@@ -25,6 +29,7 @@ function initialEchoMessage(hasName: boolean, name: string | null): string {
 export function EchoWidget() {
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
+  const [docked, setDocked] = useState(false);
   const [userName, setUserName] = useState<string | null>(() => getEchoUserName());
   const [phase, setPhase] = useState<Phase>(() => (getEchoUserName() ? 'chat' : 'awaiting_name'));
   const [messages, setMessages] = useState<EchoMessage[]>(() => [
@@ -48,8 +53,28 @@ export function EchoWidget() {
   }, [open, minimized]);
 
   const handleOpen = () => {
+    if (docked) {
+      setDocked(false);
+      return;
+    }
     setOpen(true);
     setMinimized(false);
+  };
+
+  const handleSwipeEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipedRight = info.offset.x > SWIPE_HIDE_THRESHOLD || info.velocity.x > 320;
+    const swipedLeft = info.offset.x < -SWIPE_SHOW_THRESHOLD || info.velocity.x < -280;
+
+    if (!docked && swipedRight) {
+      setDocked(true);
+      setOpen(false);
+      setMinimized(false);
+      return;
+    }
+
+    if (docked && swipedLeft) {
+      setDocked(false);
+    }
   };
 
   const pushMessage = useCallback((msg: EchoMessage) => {
@@ -90,7 +115,11 @@ export function EchoWidget() {
   };
 
   return (
-    <div className="echo-widget-root" aria-live="polite">
+    <div
+      className={cn('echo-widget-root', docked && 'echo-widget-root--docked')}
+      style={{ '--echo-peek': `${SWIPE_HIDE_OFFSET}px` } as CSSProperties}
+      aria-live="polite"
+    >
       <AnimatePresence>
         {open && !minimized && (
           <motion.div
@@ -176,19 +205,33 @@ export function EchoWidget() {
         )}
       </AnimatePresence>
 
-      <div className="echo-mascot-wrap">
-        <EchoTeaser visible={!open} />
+      <motion.div
+        className="echo-mascot-wrap"
+        drag="x"
+        dragSnapToOrigin
+        dragElastic={0.12}
+        dragMomentum={false}
+        onDragEnd={handleSwipeEnd}
+      >
+        <EchoTeaser visible={!open} hidden={docked} />
 
         <button
           type="button"
           className="echo-mascot-btn"
           onClick={() => (open && minimized ? (setMinimized(false), setOpen(true)) : handleOpen())}
-          aria-label={open ? 'Open Echo chat' : 'Chat with Echo'}
+          aria-label={
+            docked ? 'Show Echo assistant' : open ? 'Open Echo chat' : 'Chat with Echo'
+          }
         >
           <span className="echo-mascot-shadow" aria-hidden />
-          <img src={LOGO.echoMascot} alt="Echo — AI assistant" className="echo-mascot-img" draggable={false} />
+          <img
+            src={LOGO.echoMascot}
+            alt="Echo — AI assistant"
+            className={cn('echo-mascot-img', docked && 'echo-mascot-img--wave')}
+            draggable={false}
+          />
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 }

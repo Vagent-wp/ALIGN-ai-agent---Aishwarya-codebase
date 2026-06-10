@@ -11,7 +11,7 @@ import { heroSketchPositions } from '@/lib/marketing/invisibleContent';
 
 export function InvisibleHero() {
   return (
-    <section className="inv-graph-paper relative overflow-hidden pt-8 pb-20 md:pb-28 lg:pt-12">
+    <section className="inv-graph-paper relative overflow-hidden pt-6 pb-14 sm:pt-8 sm:pb-20 md:pb-28 lg:pt-12">
       <AuroraBackground
         variant="hero"
         contained
@@ -39,7 +39,7 @@ export function InvisibleHero() {
       ))}
 
       <div className="inv-container relative z-[2]">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,11 +54,11 @@ export function InvisibleHero() {
               automation, and custom platforms built to scale.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link to="/services" className="inv-btn-black">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link to="/services" className="inv-btn-black w-full text-center sm:w-auto">
                 Explore platform
               </Link>
-              <Link to="/contact" className="inv-link mt-1">
+              <Link to="/contact" className="inv-link inline-flex min-h-[44px] items-center justify-center sm:mt-1 sm:min-h-0">
                 Talk to our team
               </Link>
             </div>

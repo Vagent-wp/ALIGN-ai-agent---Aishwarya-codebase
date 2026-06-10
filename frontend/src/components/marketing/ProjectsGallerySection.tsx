@@ -10,7 +10,7 @@ export function ProjectsGallerySection() {
   return (
     <ExpandHoverGallerySection
       title="Projects we've delivered"
-      subtitle="Real platforms built for pharma, recruitment, AI, CRM, SaaS, real estate, events, and analytics — hover to explore, click to open."
+      subtitle="Real platforms built for pharma, recruitment, AI, CRM, SaaS, real estate, events, and analytics — tap to explore."
       archiveButton={{ text: 'View all projects', href: '/projects' }}
       items={homepageProjects.map((p) => ({
         src: p.image,

@@ -21,7 +21,7 @@ const compositeHeights = {
   sm: 'h-9',
   md: 'h-11',
   lg: 'h-14 md:h-16',
-  nav: 'h-11 sm:h-12 md:h-14',
+  nav: 'h-9 sm:h-10 md:h-11',
 };
 
 const markOnlyHeights = {
@@ -35,7 +35,7 @@ const mergedHeights = {
   sm: 'h-9 md:h-10',
   md: 'h-11 md:h-12',
   lg: 'h-14 md:h-[4.5rem]',
-  nav: 'h-11 sm:h-12 md:h-14',
+  nav: 'h-9 sm:h-10 md:h-11',
 };
 
 function ComposedLogo({
@@ -121,7 +121,7 @@ export function AlignBrand({
     return (
       <Link
         to="/"
-        className="inline-flex shrink-0 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
+        className="inline-flex h-full shrink-0 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
       >
         {content}
       </Link>

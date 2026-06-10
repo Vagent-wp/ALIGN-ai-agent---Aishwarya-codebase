@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-const MOBILE_BREAKPOINT = 768;
+/** Align with Tailwind `lg` — marketing nav uses hamburger below 1024px */
+const MOBILE_BREAKPOINT = 1024;
 
 export function useIsMobile() {
   const [isMobile, setIsMobile] = useState(

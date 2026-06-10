@@ -67,7 +67,12 @@ export function MarketingNavMegaMenu({ menu, open, onOpen, onClose }: MarketingN
     : `repeat(${menu.columns.length}, minmax(0, 1fr))`;
 
   return (
-    <div ref={triggerRef} className="relative" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+    <div
+      ref={triggerRef}
+      className="relative flex h-full items-center"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
       <Link
         to={menu.href}
         className={cn(

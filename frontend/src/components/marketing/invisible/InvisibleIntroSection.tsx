@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ClampReadMore } from '@/components/marketing/invisible/ClampReadMore';
 import { InvLabel, TwoToneHeadline } from '@/components/marketing/invisible/Editorial';
 import { BRAND } from '@/lib/brand';
 import { introBuildPillars } from '@/lib/marketing/invisibleContent';
@@ -14,7 +15,7 @@ export function InvisibleIntroSection() {
   return (
     <section className="inv-section">
       <div className="inv-container">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-20">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-20">
           <div>
             <InvLabel>What we build</InvLabel>
             <TwoToneHeadline
@@ -34,7 +35,7 @@ export function InvisibleIntroSection() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid auto-rows-fr grid-cols-2 items-stretch gap-3 sm:mt-16 sm:gap-4 lg:grid-cols-4">
           {introBuildPillars.map((pillar, index) => {
             const Icon = pillar.icon;
 
@@ -45,14 +46,14 @@ export function InvisibleIntroSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: index * 0.08, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className={`inv-feature-band ${pillarToneClass(pillar.tone)} flex flex-col !p-6`}
+                className={`inv-feature-band inv-grid-card ${pillarToneClass(pillar.tone)} flex h-full flex-col !p-4 sm:!p-6`}
               >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-ash)] bg-white/70 text-[var(--color-align-blue)]">
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--color-ash)] bg-white/70 text-[var(--color-align-blue)] sm:h-10 sm:w-10">
                   <Icon size={18} strokeWidth={1.75} />
                 </span>
-                <h3 className="inv-heading mt-4 !text-lg">{pillar.title}</h3>
-                <p className="inv-body-sm mt-2 flex-1">{pillar.description}</p>
-                <Link to={pillar.href} className="inv-link mt-5 inline-flex text-[13px]">
+                <h3 className="inv-heading mt-3 line-clamp-2 !text-[15px] sm:mt-4 sm:!text-lg">{pillar.title}</h3>
+                <ClampReadMore text={pillar.description} className="inv-body-sm mt-2" />
+                <Link to={pillar.href} className="inv-link mt-3 inline-flex text-[12px] sm:mt-4 sm:text-[13px] lg:mt-auto">
                   Learn more
                   <span aria-hidden>→</span>
                 </Link>

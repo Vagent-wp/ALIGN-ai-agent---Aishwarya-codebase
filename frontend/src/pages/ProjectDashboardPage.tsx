@@ -42,16 +42,16 @@ export function ProjectDashboardPage() {
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-[var(--color-ash)] shadow-sm">
-            <img src={project.image} alt={project.title} className="aspect-[21/9] w-full object-cover" />
+            <img src={project.image} alt={project.title} className="aspect-[16/9] w-full object-cover sm:aspect-[21/9]" />
           </div>
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">
-            <div className="inv-card overflow-hidden p-2 sm:p-4">
+          <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-[1fr_320px]">
+            <div className="inv-card order-2 overflow-hidden p-2 sm:p-4 lg:order-1">
               <p className="inv-label mb-3 px-2">Live dashboard preview</p>
               <NetworkDashboardMockup className="h-auto w-full" />
             </div>
 
-            <div className="space-y-6">
+            <div className="order-1 space-y-4 sm:space-y-6 lg:order-2">
               <div className="inv-card p-6">
                 <p className="inv-label">Key metrics</p>
                 <div className="mt-4 grid gap-3">

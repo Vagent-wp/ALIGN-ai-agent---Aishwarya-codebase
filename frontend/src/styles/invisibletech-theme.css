@@ -417,6 +417,328 @@
   border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
+/* Network discovery — editorial grid: copy + tabs + cards align left; mockup right */
+.marketing-invisible .inv-network-showcase {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'intro'
+    'tabs'
+    'cards'
+    'cta'
+    'mockup';
+}
+
+@media (min-width: 1024px) {
+  .marketing-invisible .inv-network-showcase {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+    column-gap: 80px;
+    row-gap: 32px;
+    grid-template-areas:
+      'intro mockup'
+      'tabs mockup'
+      'cards mockup'
+      'cta mockup';
+    align-items: start;
+  }
+}
+
+.marketing-invisible .inv-network-showcase__intro {
+  grid-area: intro;
+}
+
+.marketing-invisible .inv-network-showcase__tabs {
+  grid-area: tabs;
+}
+
+.marketing-invisible .inv-network-showcase__cards {
+  grid-area: cards;
+  width: 100%;
+}
+
+.marketing-invisible .inv-network-showcase__cta {
+  grid-area: cta;
+}
+
+.marketing-invisible .inv-network-showcase__mockup {
+  grid-area: mockup;
+}
+
+/* Live query + match intelligence — equal width, full left-column span */
+.marketing-invisible .inv-network-discovery-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+@media (max-width: 639px) {
+  .marketing-invisible .inv-network-discovery-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.marketing-invisible .inv-network-query-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+}
+
+/* Network discovery — live match pulse panel beside query card */
+.marketing-invisible .inv-network-pulse {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  height: 100%;
+  border-radius: var(--radius-cards);
+  border: 1px solid rgba(37, 99, 235, 0.14);
+  background: linear-gradient(160deg, #ffffff 0%, var(--color-align-sky) 55%, var(--color-align-lavender) 100%);
+  padding: var(--card-padding);
+  box-shadow:
+    0 8px 28px rgba(37, 99, 235, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.marketing-invisible .inv-network-pulse__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.marketing-invisible .inv-network-pulse__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-apkpraktikal);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-align-blue);
+}
+
+.marketing-invisible .inv-network-pulse__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-align-orange);
+}
+
+.marketing-invisible .inv-network-pulse__live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-align-orange);
+  animation: inv-pulse-live 1.6s ease-in-out infinite;
+}
+
+@keyframes inv-pulse-live {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.marketing-invisible .inv-network-pulse__radar {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.marketing-invisible .inv-network-pulse__svg {
+  width: min(78%, 196px);
+  aspect-ratio: 1;
+}
+
+.marketing-invisible .inv-network-pulse__ring {
+  fill: none;
+  stroke: rgba(37, 99, 235, 0.14);
+  stroke-width: 1;
+}
+
+.marketing-invisible .inv-network-pulse__ring--outer {
+  stroke-dasharray: 4 7;
+  animation: inv-radar-spin 18s linear infinite;
+  transform-origin: 100px 100px;
+}
+
+.marketing-invisible .inv-network-pulse__ring--inner {
+  stroke: rgba(249, 115, 22, 0.22);
+}
+
+@keyframes inv-radar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.marketing-invisible .inv-network-pulse__sweep {
+  stroke: var(--color-align-blue);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+  transform-origin: 100px 100px;
+  animation: inv-radar-sweep 3.2s ease-in-out infinite;
+}
+
+@keyframes inv-radar-sweep {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.35;
+  }
+}
+
+.marketing-invisible .inv-network-pulse__spoke {
+  stroke: rgba(37, 99, 235, 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.marketing-invisible .inv-network-pulse__node {
+  fill: #ffffff;
+  stroke: var(--color-align-orange);
+  stroke-width: 1.5;
+}
+
+.marketing-invisible .inv-network-pulse__node-label {
+  fill: var(--color-align-blue);
+  font-size: 8px;
+  font-weight: 700;
+  font-family: var(--font-apkpraktikal);
+}
+
+.marketing-invisible .inv-network-pulse__hub {
+  fill: var(--color-align-blue);
+  opacity: 0.92;
+}
+
+.marketing-invisible .inv-network-pulse__score {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.marketing-invisible .inv-network-pulse__score-value {
+  font-family: var(--font-apkpraktikal);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-network-pulse__score-label {
+  margin-top: 2px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-slate);
+}
+
+.marketing-invisible .inv-network-pulse__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  border-top: 1px solid rgba(37, 99, 235, 0.1);
+  padding-top: 10px;
+}
+
+.marketing-invisible .inv-network-pulse__stat-value {
+  font-family: var(--font-apkpraktikal);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-network-pulse__stat-label {
+  margin-top: 2px;
+  font-size: 9px;
+  line-height: 1.2;
+  color: var(--color-slate);
+}
+
+.marketing-invisible .inv-network-pulse__signals-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-slate);
+}
+
+.marketing-invisible .inv-network-pulse__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.marketing-invisible .inv-network-pulse__chip {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-align-blue);
+}
+
+/* Flagship products — two-column cards with compact mockups */
+.marketing-invisible #products .inv-spotlight-mock {
+  height: clamp(120px, 20vw, 188px);
+}
+
+.marketing-invisible #products .inv-spotlight-mock .inv-mock-stage {
+  display: flex;
+  height: 100%;
+  min-height: 0 !important;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 1.5vw, 14px) !important;
+}
+
+.marketing-invisible #products .inv-spotlight-mock .inv-mock-stage-img {
+  width: auto;
+  max-height: 100%;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+.marketing-invisible #products .inv-product-kaya-mock {
+  display: flex;
+  height: clamp(200px, 28vw, 272px);
+  align-items: flex-start;
+  justify-content: center;
+}
+
 /* Rich mockup stage — gradient backdrop + floating product UI */
 .marketing-invisible .inv-mock-stage {
   position: relative;
@@ -581,15 +903,19 @@
 
 /* Nav overrides — white sticky bar, keep mega-menu structure */
 .marketing-invisible .linear-nav {
-  height: 64px;
+  align-items: center;
+  height: 4rem;
   background: var(--color-canvas-white);
   border-bottom: 1px solid var(--color-ash);
 }
 
 .marketing-invisible .linear-nav-link {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-apk-galeria);
   font-size: 14px;
   font-weight: 400;
+  line-height: 1;
   color: var(--color-carbon-ink);
   border-radius: var(--radius-pills);
   padding: 8px 14px;
@@ -901,5 +1227,139 @@
 @media (prefers-reduced-motion: reduce) {
   .marketing-invisible .inv-starfall-float {
     animation: none;
+  }
+}
+
+/* ── Mobile & tablet polish (desktop layouts unchanged at lg+) ── */
+@media (max-width: 1023px) {
+  .marketing-invisible {
+    --section-gap: 52px;
+    --card-padding: 16px;
+  }
+
+  .marketing-invisible .inv-container {
+    padding-inline: 16px;
+  }
+
+  .marketing-invisible .inv-section {
+    padding-block: var(--section-gap);
+  }
+
+  .marketing-invisible .inv-footer {
+    padding-block: 48px calc(40px + 64px);
+  }
+
+  .marketing-invisible .inv-stats-band {
+    padding-block: 36px;
+  }
+
+  .marketing-invisible .inv-mock-stage {
+    min-height: 200px;
+    padding: clamp(12px, 3vw, 24px);
+  }
+
+  .marketing-invisible .inv-mock-stage-img {
+    max-height: 280px;
+    object-fit: contain;
+  }
+
+  /* Trust strip — static wrap instead of fast marquee on small screens */
+  .marketing-invisible .inv-trust-marquee-inner {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: var(--page-max-width);
+    margin-inline: auto;
+    padding-inline: 16px;
+    gap: 10px 20px;
+  }
+
+  .marketing-invisible .inv-trust-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .marketing-invisible .inv-trust-marquee-inner > .inv-trust-marquee-track:last-child {
+    display: none;
+  }
+
+  .marketing-invisible .inv-trust-marquee-item {
+    font-size: 12px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Horizontal tab scroll affordance */
+  .marketing-invisible .inv-scroll-tabs {
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    scrollbar-width: none;
+  }
+
+  .marketing-invisible .inv-scroll-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marketing-invisible .inv-platform-tab {
+    padding: 14px 0;
+  }
+
+  .marketing-invisible .inv-heading-lg {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+  }
+
+  .marketing-invisible .inv-stat-value {
+    font-size: 1.5rem;
+  }
+
+  .marketing-invisible .inv-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Equal-height grid cards */
+  .marketing-invisible .inv-grid-card.inv-feature-band {
+    padding: 14px !important;
+  }
+
+  .marketing-invisible .inv-card.inv-grid-card {
+    min-height: 168px;
+  }
+
+  .marketing-invisible .inv-spotlight-mock {
+    height: 112px;
+  }
+
+  .marketing-invisible .inv-spotlight-mock .inv-mock-stage {
+    display: flex;
+    height: 100%;
+    min-height: 0 !important;
+    align-items: center;
+    justify-content: center;
+    padding: 8px !important;
+  }
+
+  .marketing-invisible .inv-spotlight-mock .inv-mock-stage-img {
+    width: auto;
+    max-height: 92px;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .marketing-invisible .inv-spotlight-mock {
+    height: 148px;
+  }
+
+  .marketing-invisible .inv-spotlight-mock .inv-mock-stage-img {
+    max-height: 120px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .marketing-invisible .inv-container {
+    padding-inline: 28px;
   }
 }

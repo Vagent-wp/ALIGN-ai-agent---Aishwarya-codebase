@@ -28,8 +28,24 @@ export function KayaAgentShowcaseSection() {
           <span className="text-[var(--color-slate)]">24/7.</span>
         </h2>
 
-        <div className="mt-14 grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(280px,380px)] lg:gap-16 xl:grid-cols-2">
-          <div>
+        <div className="mt-10 grid items-start gap-8 sm:mt-14 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(280px,380px)] lg:gap-16 xl:grid-cols-2">
+          <motion.div
+            className="order-1 mx-auto w-full max-w-[380px] lg:order-2 lg:mx-0 lg:justify-self-end"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="inv-card !p-4">
+              <KayaWhatsAppAnimatedMockup
+                key={active.id}
+                scenarioKey={active.id}
+                messages={active.messages}
+              />
+            </div>
+          </motion.div>
+
+          <div className="order-2 lg:order-1">
             <div role="tablist" aria-label={`${BRAND.assistant} agent capabilities`}>
               {kayaShowcaseScenarios.map((scenario, index) => (
                 <SideTab
@@ -59,22 +75,6 @@ export function KayaAgentShowcaseSection() {
               </motion.div>
             </AnimatePresence>
           </div>
-
-          <motion.div
-            className="mx-auto w-full max-w-[380px] lg:mx-0 lg:justify-self-end"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="inv-card !p-4">
-              <KayaWhatsAppAnimatedMockup
-                key={active.id}
-                scenarioKey={active.id}
-                messages={active.messages}
-              />
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

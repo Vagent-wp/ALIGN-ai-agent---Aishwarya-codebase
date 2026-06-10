@@ -10,6 +10,8 @@ interface KayaWhatsAppAnimatedMockupProps {
   scenarioKey: string;
   className?: string;
   autoPlay?: boolean;
+  /** Fits inside narrow product cards */
+  compact?: boolean;
 }
 
 function TypingIndicator() {
@@ -39,7 +41,15 @@ function TypingIndicator() {
   );
 }
 
-function MessageBubble({ message, index }: { message: KayaChatMessage; index: number }) {
+function MessageBubble({
+  message,
+  index,
+  compact = false,
+}: {
+  message: KayaChatMessage;
+  index: number;
+  compact?: boolean;
+}) {
   const isUser = message.from === 'user';
 
   return (
@@ -47,23 +57,35 @@ function MessageBubble({ message, index }: { message: KayaChatMessage; index: nu
       initial={{ opacity: 0, y: 12, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: index * 0.02 }}
-      className={cn('flex items-end gap-2', isUser ? 'flex-row-reverse' : 'flex-row')}
+      className={cn('flex items-end', compact ? 'gap-1.5' : 'gap-2', isUser ? 'flex-row-reverse' : 'flex-row')}
     >
       {!isUser && (
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-[10px] font-bold text-white">
+        <div
+          className={cn(
+            'flex shrink-0 items-center justify-center rounded-full bg-[#25D366] font-bold text-white',
+            compact ? 'h-5 w-5 text-[8px]' : 'h-7 w-7 text-[10px]'
+          )}
+        >
           K
         </div>
       )}
       <div
         className={cn(
-          'max-w-[82%] whitespace-pre-line rounded-2xl px-3 py-2 text-[13px] leading-snug shadow-sm',
+          'max-w-[82%] whitespace-pre-line rounded-2xl leading-snug shadow-sm',
+          compact ? 'px-2 py-1.5 text-[10px]' : 'px-3 py-2 text-[13px]',
           isUser
             ? 'rounded-br-md bg-[#DCF8C6] text-[#111b21]'
             : 'rounded-bl-md bg-white text-[#111b21]'
         )}
       >
         {message.text}
-        <p className={cn('mt-1 text-[10px]', isUser ? 'text-[#667781]' : 'text-[#8696a0]')}>
+        <p
+          className={cn(
+            'mt-0.5',
+            compact ? 'text-[8px]' : 'mt-1 text-[10px]',
+            isUser ? 'text-[#667781]' : 'text-[#8696a0]'
+          )}
+        >
           {isUser ? '10:24 AM' : '10:24 AM'}
           {!isUser && <span className="ml-1 text-[#53bdeb]">✓✓</span>}
         </p>
@@ -77,6 +99,7 @@ export function KayaWhatsAppAnimatedMockup({
   scenarioKey,
   className,
   autoPlay = true,
+  compact = false,
 }: KayaWhatsAppAnimatedMockupProps) {
   const [visibleCount, setVisibleCount] = useState(0);
   const [showTyping, setShowTyping] = useState(false);
@@ -131,13 +154,21 @@ export function KayaWhatsAppAnimatedMockup({
   return (
     <div
       className={cn(
-        'mx-auto w-full max-w-[320px] overflow-hidden rounded-[2rem] border-[6px] border-[#1a1a1a] bg-[#1a1a1a] shadow-[0_24px_64px_rgba(0,0,0,0.18)]',
+        'mx-auto w-full overflow-hidden bg-[#1a1a1a] shadow-[0_24px_64px_rgba(0,0,0,0.18)]',
+        compact
+          ? 'max-w-full rounded-[1.25rem] border-[4px] border-[#1a1a1a] shadow-[0_12px_32px_rgba(0,0,0,0.12)]'
+          : 'max-w-[320px] rounded-[2rem] border-[6px] border-[#1a1a1a]',
         className
       )}
       aria-hidden
     >
       {/* Status bar */}
-      <div className="flex items-center justify-between bg-[#075E54] px-5 pb-1 pt-2 text-[10px] font-medium text-white/90">
+      <div
+        className={cn(
+          'flex items-center justify-between bg-[#075E54] pb-1 pt-2 font-medium text-white/90',
+          compact ? 'px-3 text-[8px]' : 'px-5 text-[10px]'
+        )}
+      >
         <span>10:24</span>
         <div className="flex items-center gap-1">
           <span className="h-2 w-3 rounded-sm border border-white/80" />
@@ -146,25 +177,40 @@ export function KayaWhatsAppAnimatedMockup({
       </div>
 
       {/* WhatsApp header */}
-      <div className="flex items-center gap-3 bg-[#075E54] px-3 pb-3 pt-1 text-white">
-        <ArrowLeft size={18} strokeWidth={2} className="opacity-90" />
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-sm font-bold">
+      <div
+        className={cn(
+          'flex items-center bg-[#075E54] text-white',
+          compact ? 'gap-2 px-2 pb-2 pt-0.5' : 'gap-3 px-3 pb-3 pt-1'
+        )}
+      >
+        <ArrowLeft size={compact ? 14 : 18} strokeWidth={2} className="opacity-90" />
+        <div
+          className={cn(
+            'flex items-center justify-center rounded-full bg-[#25D366] font-bold',
+            compact ? 'h-7 w-7 text-[10px]' : 'h-9 w-9 text-sm'
+          )}
+        >
           K
         </div>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold">{BRAND.assistant}</p>
-          <p className="text-[11px] text-white/75">online</p>
+          <p className={cn('truncate font-semibold', compact ? 'text-[11px]' : 'text-sm')}>
+            {BRAND.assistant}
+          </p>
+          <p className={cn('text-white/75', compact ? 'text-[9px]' : 'text-[11px]')}>online</p>
         </div>
-        <div className="flex items-center gap-4 opacity-90">
-          <Video size={18} strokeWidth={2} />
-          <Phone size={17} strokeWidth={2} />
-          <MoreVertical size={18} strokeWidth={2} />
+        <div className={cn('flex items-center opacity-90', compact ? 'gap-2' : 'gap-4')}>
+          <Video size={compact ? 14 : 18} strokeWidth={2} />
+          <Phone size={compact ? 13 : 17} strokeWidth={2} />
+          <MoreVertical size={compact ? 14 : 18} strokeWidth={2} />
         </div>
       </div>
 
       {/* Chat area */}
       <div
-        className="relative min-h-[340px] bg-[#ECE5DD] px-3 py-4"
+        className={cn(
+          'relative bg-[#ECE5DD]',
+          compact ? 'min-h-[200px] px-2 py-2.5 sm:min-h-[220px]' : 'min-h-[340px] px-3 py-4'
+        )}
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4cdc4' fill-opacity='0.35'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
@@ -176,10 +222,10 @@ export function KayaWhatsAppAnimatedMockup({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="space-y-3"
+            className={compact ? 'space-y-2' : 'space-y-3'}
           >
             {visibleMessages.map((msg, i) => (
-              <MessageBubble key={`${scenarioKey}-${i}`} message={msg} index={i} />
+              <MessageBubble key={`${scenarioKey}-${i}`} message={msg} index={i} compact={compact} />
             ))}
             <AnimatePresence>{showTyping && <TypingIndicator />}</AnimatePresence>
           </motion.div>
@@ -187,10 +233,22 @@ export function KayaWhatsAppAnimatedMockup({
       </div>
 
       {/* Input bar */}
-      <div className="flex items-center gap-2 bg-[#f0f0f0] px-3 py-2">
-        <div className="flex-1 rounded-full bg-white px-4 py-2 text-xs text-[#8696a0]">Message</div>
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#075E54] text-white">
-          <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden>
+      <div className={cn('flex items-center gap-2 bg-[#f0f0f0]', compact ? 'px-2 py-1.5' : 'px-3 py-2')}>
+        <div
+          className={cn(
+            'flex-1 rounded-full bg-white text-[#8696a0]',
+            compact ? 'px-3 py-1.5 text-[10px]' : 'px-4 py-2 text-xs'
+          )}
+        >
+          Message
+        </div>
+        <div
+          className={cn(
+            'flex items-center justify-center rounded-full bg-[#075E54] text-white',
+            compact ? 'h-7 w-7' : 'h-9 w-9'
+          )}
+        >
+          <svg viewBox="0 0 24 24" className={cn('fill-current', compact ? 'h-4 w-4' : 'h-5 w-5')} aria-hidden>
             <path d="M1.101 21.757L23.8 12.045 1.101 2.333l.901 9.526 13.007 1.017-13.007 1.017-.901 9.864z" />
           </svg>
         </div>

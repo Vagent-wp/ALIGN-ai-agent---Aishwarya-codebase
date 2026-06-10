@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { InvLabel, TwoToneHeadline } from '@/components/marketing/invisible/Editorial';
+import { useHashSection } from '@/hooks/useHashSection';
 import { serviceCategories } from '@/lib/marketing/content';
 import { cn } from '@/lib/utils';
 
@@ -9,11 +9,13 @@ interface ServiceCategoriesSectionProps {
   standalone?: boolean;
 }
 
+const SERVICE_IDS = serviceCategories.map((c) => c.id);
+
 function DetailList({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
       <p className="inv-label mb-3">{title}</p>
-      <ul className="grid gap-1.5 sm:grid-cols-2">
+      <ul className="grid grid-cols-2 gap-1.5">
         {items.map((item) => (
           <li
             key={item}
@@ -28,25 +30,20 @@ function DetailList({ title, items }: { title: string; items: string[] }) {
 }
 
 export function ServiceCategoriesSection({ standalone = false }: ServiceCategoriesSectionProps) {
-  const [activeId, setActiveId] = useState(serviceCategories[0]?.id ?? '');
-
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && serviceCategories.some((c) => c.id === hash)) {
-      setActiveId(hash);
-      window.setTimeout(() => {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
-  }, []);
+  const { activeId, selectSection } = useHashSection(
+    SERVICE_IDS,
+    serviceCategories[0]?.id ?? '',
+    { pagePath: '/services' },
+  );
 
   const active = serviceCategories.find((c) => c.id === activeId) ?? serviceCategories[0];
 
   const selectCategory = (id: string) => {
-    setActiveId(id);
     if (standalone) {
-      window.history.replaceState(null, '', `/services#${id}`);
+      selectSection(id, '/services');
+      return;
     }
+    selectSection(id, window.location.pathname);
   };
 
   return (
@@ -68,7 +65,7 @@ export function ServiceCategoriesSection({ standalone = false }: ServiceCategori
         )}
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(240px,300px)_1fr] lg:gap-8">
-          <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
+          <div className="inv-scroll-tabs flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
             {serviceCategories.map((cat) => {
               const isActive = cat.id === activeId;
               return (
@@ -112,8 +109,9 @@ export function ServiceCategoriesSection({ standalone = false }: ServiceCategori
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--color-ash)] pt-6">
-                  <Link to="/contact" className="inv-btn-black text-sm">
-                    Get a quote for {active.title}
+                  <Link to="/contact" className="inv-btn-black w-full text-center text-sm sm:w-auto">
+                    <span className="sm:hidden">Get a quote</span>
+                    <span className="hidden sm:inline">Get a quote for {active.title}</span>
                   </Link>
                   <Link to="/projects" className="inv-link text-sm">
                     See related projects
