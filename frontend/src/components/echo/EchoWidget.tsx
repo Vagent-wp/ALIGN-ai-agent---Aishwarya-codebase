@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X, Minus } from 'lucide-react';
+import { EchoTeaser } from '@/components/echo/EchoTeaser';
 import { sendEchoMessage, type EchoMessage } from '@/lib/echo/api';
 import { getEchoUserName, parseVisitorName, setEchoUserName } from '@/lib/echo/session';
 import { LOGO } from '@/lib/brand';
 import { cn } from '@/lib/utils';
-const TEASER_MESSAGES = [
-  'Hi! I\'m Echo — ask me anything',
-  'Questions about our services?',
-  'Need help finding the right page?',
-];
 
 type Phase = 'awaiting_name' | 'chat';
 
@@ -29,7 +25,6 @@ function initialEchoMessage(hasName: boolean, name: string | null): string {
 export function EchoWidget() {
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
-  const [teaserIndex, setTeaserIndex] = useState(0);
   const [userName, setUserName] = useState<string | null>(() => getEchoUserName());
   const [phase, setPhase] = useState<Phase>(() => (getEchoUserName() ? 'chat' : 'awaiting_name'));
   const [messages, setMessages] = useState<EchoMessage[]>(() => [
@@ -39,14 +34,6 @@ export function EchoWidget() {
   const [loading, setLoading] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (open) return;
-    const id = window.setInterval(() => {
-      setTeaserIndex((i) => (i + 1) % TEASER_MESSAGES.length);
-    }, 4500);
-    return () => window.clearInterval(id);
-  }, [open]);
 
   useEffect(() => {
     if (open && !minimized) {
@@ -190,20 +177,7 @@ export function EchoWidget() {
       </AnimatePresence>
 
       <div className="echo-mascot-wrap">
-        <AnimatePresence>
-          {!open && (
-            <motion.div
-              key={teaserIndex}
-              className="echo-teaser"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.25 }}
-            >
-              {TEASER_MESSAGES[teaserIndex]}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <EchoTeaser visible={!open} />
 
         <button
           type="button"

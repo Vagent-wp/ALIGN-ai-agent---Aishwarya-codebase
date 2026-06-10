@@ -1,7 +1,7 @@
 export const BRAND = {
   company: 'ALIGN Ecosystems',
   platform: 'ALIGN Network',
-  assistant: 'Aishwarya',
+  assistant: 'Kaya',
   expansion: 'Artificial Lead Intelligence & Growth Network',
   taglinePrimary: 'Where Opportunities Find People.',
   taglineAlt: 'Discover. Connect. Grow.',

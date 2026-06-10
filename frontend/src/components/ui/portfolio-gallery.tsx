@@ -73,7 +73,7 @@ export function PortfolioGallery({
       'group inline-flex items-center gap-2 transition-all',
       isSection
         ? 'linear-btn-pill'
-        : 'linear-btn-ghost mb-12 border border-[#23252a] px-6'
+        : 'linear-btn-ghost mb-12 border border-[var(--color-graphite)] px-6'
     );
 
     if (archiveButton.href.startsWith('http')) {
@@ -233,7 +233,7 @@ export function PortfolioGallery({
           </div>
 
           <div className="linear-card overflow-hidden">
-            <p className="hidden border-b border-[#23252a] px-6 py-3 text-center text-sm text-[#8a8f98] md:block">
+            <p className="hidden border-b border-[var(--color-graphite)] px-6 py-3 text-center text-sm text-[var(--color-fog)] md:block">
               Click a project to open its dashboard preview
             </p>
             {galleryCards}

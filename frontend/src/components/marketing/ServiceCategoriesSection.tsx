@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SectionHeader } from '@/components/marketing/SectionHeader';
+import { InvLabel, TwoToneHeadline } from '@/components/marketing/invisible/Editorial';
 import { serviceCategories } from '@/lib/marketing/content';
 import { cn } from '@/lib/utils';
 
@@ -12,10 +12,13 @@ interface ServiceCategoriesSectionProps {
 function DetailList({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <p className="mb-2 text-xs font-[510] uppercase tracking-wider text-[#62666d]">{title}</p>
+      <p className="inv-label mb-3">{title}</p>
       <ul className="grid gap-1.5 sm:grid-cols-2">
         {items.map((item) => (
-          <li key={item} className="text-sm text-[#d0d6e0] before:mr-2 before:text-[#5e6ad2] before:content-['·']">
+          <li
+            key={item}
+            className="inv-body-sm before:mr-2 before:text-[var(--color-align-orange)] before:content-['·']"
+          >
             {item}
           </li>
         ))}
@@ -47,14 +50,21 @@ export function ServiceCategoriesSection({ standalone = false }: ServiceCategori
   };
 
   return (
-    <section id="services" className={cn('marketing-section scroll-mt-24', standalone && 'pt-10')}>
-      <div className="marketing-container px-6">
+    <section id="services" className={cn('inv-section scroll-mt-24', standalone && '!pt-10')}>
+      <div className="inv-container">
         {!standalone && (
-          <SectionHeader
-            eyebrow="Core Service Categories"
-            title="Everything you need to scale with intelligent systems"
-            subtitle="From AI agents and automation to SaaS, CRM, web apps, and immersive 3D experiences — built for your business."
-          />
+          <>
+            <InvLabel>Core service categories</InvLabel>
+            <TwoToneHeadline
+              className="mt-4"
+              primary="Everything you need to scale"
+              secondary="with intelligent systems."
+            />
+            <p className="inv-body mt-4 max-w-2xl">
+              From AI agents and automation to SaaS, CRM, web apps, and immersive 3D experiences — built for your
+              business.
+            </p>
+          </>
         )}
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(240px,300px)_1fr] lg:gap-8">
@@ -67,13 +77,13 @@ export function ServiceCategoriesSection({ standalone = false }: ServiceCategori
                   type="button"
                   onClick={() => selectCategory(cat.id)}
                   className={cn(
-                    'shrink-0 rounded-md border px-4 py-3 text-left transition-all duration-200 lg:w-full',
+                    'shrink-0 rounded-xl border px-4 py-3 text-left transition-all duration-200 lg:w-full',
                     isActive
-                      ? 'linear-card-deep border-[#383b3f] text-[#f7f8f8]'
-                      : 'border-transparent text-[#8a8f98] hover:bg-[#161718] hover:text-[#f7f8f8]'
+                      ? 'inv-feature-band inv-feature-band--sky border-[rgba(37,99,235,0.12)] text-[var(--color-carbon-ink)] shadow-sm'
+                      : 'border border-transparent text-[var(--color-steel)] hover:bg-[var(--color-mist)] hover:text-[var(--color-carbon-ink)]'
                   )}
                 >
-                  <p className="text-sm font-[510] sm:text-base">{cat.title}</p>
+                  <p className="text-sm font-medium sm:text-base">{cat.title}</p>
                 </button>
               );
             })}
@@ -88,10 +98,10 @@ export function ServiceCategoriesSection({ standalone = false }: ServiceCategori
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="linear-card scroll-mt-28 p-6 sm:p-8"
+                className="inv-card scroll-mt-28 p-6 sm:p-8"
               >
-                <h3 className="text-xl font-[510] text-[#f7f8f8] sm:text-2xl">{active.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#8a8f98] sm:text-base">{active.summary}</p>
+                <h3 className="inv-heading !text-xl sm:!text-2xl">{active.title}</h3>
+                <p className="inv-body mt-2">{active.summary}</p>
 
                 <div className="mt-6 space-y-6">
                   <DetailList title="Services" items={active.services} />
@@ -101,15 +111,13 @@ export function ServiceCategoriesSection({ standalone = false }: ServiceCategori
                   {active.benefits && <DetailList title="Benefits" items={active.benefits} />}
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-3 border-t border-[#23252a] pt-6">
-                  <Link to="/contact" className="linear-btn-primary text-sm">
+                <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--color-ash)] pt-6">
+                  <Link to="/contact" className="inv-btn-black text-sm">
                     Get a quote for {active.title}
                   </Link>
-                  <Link
-                    to="/projects"
-                    className="text-sm font-[510] text-[#8a8f98] transition-colors hover:text-[#f7f8f8]"
-                  >
-                    See related projects →
+                  <Link to="/projects" className="inv-link text-sm">
+                    See related projects
+                    <span aria-hidden>→</span>
                   </Link>
                 </div>
               </motion.div>

@@ -39,7 +39,7 @@ export function MarketingNavbar() {
             MARKETING_NAV_HEIGHT.bar
           )}
         >
-          <AlignBrand variant="full" size="nav" surface="dark" />
+          <AlignBrand variant="full" size="nav" surface="light" />
 
           {!isMobile && (
             <nav className="relative hidden items-center gap-0.5 overflow-visible lg:flex">
@@ -77,7 +77,7 @@ export function MarketingNavbar() {
           {isMobile && (
             <button
               type="button"
-              className="touch-target flex h-10 w-10 items-center justify-center rounded-md text-[#f7f8f8] hover:bg-[#161718] lg:hidden"
+              className="touch-target flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-carbon-ink)] hover:bg-[var(--color-mist)] lg:hidden"
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
             >
@@ -93,7 +93,7 @@ export function MarketingNavbar() {
         {isMobile && open && (
           <motion.nav
             className={cn(
-              'fixed inset-0 z-[210] overflow-y-auto bg-[#08090a] lg:hidden',
+              'fixed inset-0 z-[210] overflow-y-auto bg-[var(--color-canvas-white)] lg:hidden',
               MARKETING_NAV_HEIGHT.top
             )}
             initial={{ opacity: 0 }}
@@ -105,7 +105,7 @@ export function MarketingNavbar() {
               <Link
                 to="/"
                 onClick={() => setOpen(false)}
-                className="linear-card-deep px-4 py-3 text-sm font-[510] text-[#f7f8f8]"
+                className="inv-card flex min-h-[44px] items-center px-4 py-3 text-sm text-[var(--color-carbon-ink)]"
               >
                 Home
               </Link>
@@ -115,7 +115,7 @@ export function MarketingNavbar() {
                   <Link
                     to={menu.href}
                     onClick={() => setOpen(false)}
-                    className="mb-2 block text-sm font-[510] text-[#f7f8f8]"
+                    className="mb-2 block text-sm font-medium text-[var(--color-carbon-ink)]"
                   >
                     {menu.label}
                   </Link>
@@ -126,7 +126,7 @@ export function MarketingNavbar() {
                           key={`${menu.id}-${link.label}`}
                           to={link.href}
                           onClick={() => setOpen(false)}
-                          className="linear-card-deep flex min-h-[44px] items-center px-4 py-2.5 text-sm text-[#d0d6e0]"
+                          className="inv-card flex min-h-[44px] items-center px-4 py-2.5 text-sm text-[var(--color-iron)]"
                         >
                           {link.label}
                         </Link>
@@ -135,7 +135,7 @@ export function MarketingNavbar() {
                           key={`${menu.id}-${link.label}`}
                           href={link.href}
                           onClick={() => setOpen(false)}
-                          className="linear-card-deep flex min-h-[44px] items-center px-4 py-2.5 text-sm text-[#d0d6e0]"
+                          className="inv-card flex min-h-[44px] items-center px-4 py-2.5 text-sm text-[var(--color-iron)]"
                         >
                           {link.label}
                         </a>
@@ -150,13 +150,13 @@ export function MarketingNavbar() {
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className="linear-card-deep px-4 py-3 text-sm text-[#d0d6e0]"
+                  className="inv-card px-4 py-3 text-sm text-[var(--color-iron)]"
                 >
                   {link.label}
                 </Link>
               ))}
 
-              <Link to="/onboarding" onClick={() => setOpen(false)} className="linear-btn-primary w-full text-center">
+              <Link to="/onboarding" onClick={() => setOpen(false)} className="inv-btn-lime w-full text-center">
                 Join Network
               </Link>
             </div>

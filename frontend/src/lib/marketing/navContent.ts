@@ -5,7 +5,7 @@ export interface PastelFeatureCard {
   body: string;
   cta: string;
   ctaHref: string;
-  visual: 'cartoon-ai' | 'workflow-mockup';
+  visual: 'ai-assistant' | 'ai-search';
 }
 
 export const pastelFeatureCards: PastelFeatureCard[] = [
@@ -16,7 +16,7 @@ export const pastelFeatureCards: PastelFeatureCard[] = [
     body: 'WhatsApp AI, voice agents, lead qualification, CRM automation, and workflow systems — everything your team needs to move faster without losing quality.',
     cta: 'Explore AI solutions',
     ctaHref: '/services#ai-agents',
-    visual: 'cartoon-ai',
+    visual: 'ai-assistant',
   },
   {
     id: 'workflows',
@@ -25,7 +25,7 @@ export const pastelFeatureCards: PastelFeatureCard[] = [
     body: 'Startups, agencies, and enterprises each get clear workspaces — dashboards, pipelines, analytics, and client portals without spreadsheet chaos.',
     cta: 'Explore platforms',
     ctaHref: '/services#saas',
-    visual: 'workflow-mockup',
+    visual: 'ai-search',
   },
 ];
 

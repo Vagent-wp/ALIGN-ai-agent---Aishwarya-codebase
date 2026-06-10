@@ -15,7 +15,7 @@ export function PublicLayout() {
   }, [location.pathname, location.hash, navigate]);
 
   return (
-    <div className="marketing-hybrid marketing-linear marketing-perplexity marketing-elevenlabs marketing-vercel flex min-h-screen flex-col">
+    <div className="marketing-invisible flex min-h-screen flex-col">
       <MarketingNavbar />
       <main className="flex-1">
         <Outlet />

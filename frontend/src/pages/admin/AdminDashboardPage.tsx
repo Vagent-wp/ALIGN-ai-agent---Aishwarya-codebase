@@ -101,7 +101,7 @@ export function AdminDashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total profiles" value={overview?.totalProfiles ?? 0} />
         <StatCard label="Web onboarded" value={overview?.webOnboarded ?? 0} sub="Via website form" />
-        <StatCard label="WhatsApp onboarded" value={overview?.whatsappOnboarded ?? 0} sub="Via Aishwarya" />
+        <StatCard label="WhatsApp onboarded" value={overview?.whatsappOnboarded ?? 0} sub="Via Kaya" />
         <StatCard label="Completed onboarding" value={overview?.completedOnboarding ?? 0} />
         <StatCard label="Active profiles" value={overview?.activeProfiles ?? 0} />
         <StatCard label="Total users" value={overview?.totalUsers ?? 0} />

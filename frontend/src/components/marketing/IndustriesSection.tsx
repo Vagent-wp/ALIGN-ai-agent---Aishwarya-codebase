@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SectionHeader } from '@/components/marketing/SectionHeader';
+import { InvLabel, TwoToneHeadline } from '@/components/marketing/invisible/Editorial';
 import { industries } from '@/lib/marketing/content';
 import { cn } from '@/lib/utils';
 
@@ -31,14 +31,20 @@ export function IndustriesSection({ standalone = false }: IndustriesSectionProps
   };
 
   return (
-    <section id="industries" className={cn('marketing-section scroll-mt-24', standalone && 'pt-10')}>
-      <div className="marketing-container px-6">
+    <section id="industries" className={cn('inv-section scroll-mt-24', standalone && '!pt-10')}>
+      <div className="inv-container">
         {!standalone && (
-          <SectionHeader
-            eyebrow="Industries We Serve"
-            title="Proven solutions across sectors"
-            subtitle="We deliver tailored technology for pharmaceutical, recruitment, startups, real estate, and more."
-          />
+          <>
+            <InvLabel>Industries we serve</InvLabel>
+            <TwoToneHeadline
+              className="mt-4"
+              primary="Proven solutions"
+              secondary="across sectors."
+            />
+            <p className="inv-body mt-4 max-w-2xl">
+              We deliver tailored technology for pharmaceutical, recruitment, startups, real estate, and more.
+            </p>
+          </>
         )}
 
         <div className={cn('flex flex-wrap justify-center gap-2 sm:gap-3', !standalone && 'mt-10')}>
@@ -48,10 +54,10 @@ export function IndustriesSection({ standalone = false }: IndustriesSectionProps
               type="button"
               onClick={() => selectIndustry(ind.id)}
               className={cn(
-                'rounded-md px-4 py-2 text-sm font-[510] transition-all duration-200',
+                'rounded-xl border px-4 py-2 text-sm font-medium transition-all duration-200',
                 activeId === ind.id
-                  ? 'bg-[#383b3f] text-[#f7f8f8] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.2)]'
-                  : 'text-[#8a8f98] hover:text-[#f7f8f8]'
+                  ? 'pastel-card-mint border-[var(--align-mint-border)] text-[var(--color-carbon-ink)] shadow-sm'
+                  : 'border border-transparent text-[var(--color-steel)] hover:bg-[var(--color-mist)] hover:text-[var(--color-carbon-ink)]'
               )}
             >
               {ind.title}
@@ -68,13 +74,16 @@ export function IndustriesSection({ standalone = false }: IndustriesSectionProps
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="linear-card mx-auto mt-10 max-w-2xl scroll-mt-28 p-8 text-center"
+              className="inv-card mx-auto mt-10 max-w-2xl scroll-mt-28 p-8 text-center"
             >
-              <h3 className="linear-heading-lg text-2xl sm:text-3xl">{active.title}</h3>
-              <p className="mt-2 text-sm font-[510] uppercase tracking-wider text-[#62666d]">Projects Delivered</p>
+              <h3 className="inv-heading !text-2xl sm:!text-3xl">{active.title}</h3>
+              <p className="inv-label mt-3 justify-center">Projects delivered</p>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {active.projects.map((project) => (
-                  <li key={project} className="linear-card-deep px-4 py-3 text-sm font-[510] text-[#d0d6e0]">
+                  <li
+                    key={project}
+                    className="inv-card !border-[var(--color-ash)] !bg-[var(--color-mist)]/50 !p-4 text-sm font-medium"
+                  >
                     {project}
                   </li>
                 ))}

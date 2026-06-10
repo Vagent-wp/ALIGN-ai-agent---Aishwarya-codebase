@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { LinearHeroMockup } from '@/components/marketing/linear/LinearHeroMockup';
+import { AlignVisual, type AlignVisualId } from '@/components/marketing/illustrations/AlignVisual';
 import { productShowcaseItems } from '@/lib/marketing/stripeContent';
+
+const SHOWCASE_VISUALS: AlignVisualId[] = ['network-dashboard', 'kaya-chat', 'ai-search'];
 
 /** Stripe product showcase — 3-column cards with warm gradient wash + floating mockup */
 export function StripeProductShowcase() {
@@ -28,7 +30,7 @@ export function StripeProductShowcase() {
               transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="stripe-product-card-mockup">
-                <LinearHeroMockup className="!shadow-none !rounded-none border-0" />
+                <AlignVisual visual={SHOWCASE_VISUALS[index % SHOWCASE_VISUALS.length]!} framed={false} />
               </div>
               <h3 className="stripe-product-card-title">{item.title}</h3>
               <p className="stripe-product-card-body">{item.body}</p>

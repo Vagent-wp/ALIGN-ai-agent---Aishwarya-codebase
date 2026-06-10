@@ -3,7 +3,7 @@
 .marketing-perplexity {
   /* Colors */
   --color-ink: #27251e;
-  --color-cream: #faf8f5;
+  --color-cream: #f5f3ff;
   --color-pure-black: #000000;
   --color-smoke: #72706b;
   --color-ash: #92918b;
@@ -45,9 +45,9 @@
   --radius-tags: 9999px;
 
   /* Surfaces */
-  --surface-cream-canvas: #faf8f5;
-  --surface-sidebar: #faf8f5;
-  --surface-input-field: #faf8f5;
+  --surface-cream-canvas: #f5f3ff;
+  --surface-sidebar: #f5f3ff;
+  --surface-input-field: #f5f3ff;
   --surface-active-item: #27251e;
 }
 

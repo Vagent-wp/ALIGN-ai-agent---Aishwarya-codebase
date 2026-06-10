@@ -1,9 +1,9 @@
 import { SectionHeading, SectionTitle } from '@/components/shared/SectionTitle';
 
 const steps = [
-  { step: '01', title: 'Message Aishwarya', desc: 'Start a conversation on WhatsApp. No app download required.' },
-  { step: '02', title: 'Describe your need', desc: 'Tell her naturally — "I need a UI designer for my fintech startup" works perfectly.' },
-  { step: '03', title: 'Get matched', desc: 'Aishwarya searches the ecosystem and presents the best matches.' },
+  { step: '01', title: 'Message Kaya', desc: 'Start a conversation on WhatsApp. No app download required.' },
+  { step: '02', title: 'Describe your need', desc: 'Tell Kaya naturally — "I need a UI designer for my fintech startup" works perfectly.' },
+  { step: '03', title: 'Get matched', desc: 'Kaya searches the ecosystem and presents the best matches.' },
   { step: '04', title: 'Connect & grow', desc: 'Choose who to connect with. Build relationships that matter.' },
 ];
 

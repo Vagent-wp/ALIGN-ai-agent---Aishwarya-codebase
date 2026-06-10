@@ -36,7 +36,7 @@
     rgb(251, 118, 250) 50%,
     rgb(255, 207, 94)
   );
-  --gradient-text-hero: linear-gradient(135deg, #533afd 0%, #8087ff 40%, #50617a 100%);
+  --gradient-text-hero: linear-gradient(135deg, #3182ce 0%, #533afd 45%, #50617a 100%);
   --gradient-card-wash: linear-gradient(
     0deg,
     rgba(255, 97, 24, 0.15) 0%,
@@ -114,17 +114,17 @@
   height: min(70vw, 720px);
   background: radial-gradient(
     circle at 60% 50%,
-    rgba(83, 58, 253, 0.45) 0%,
-    rgba(247, 45, 243, 0.25) 30%,
-    rgba(255, 97, 24, 0.12) 50%,
+    rgba(37, 99, 235, 0.12) 0%,
+    rgba(129, 140, 248, 0.08) 30%,
+    rgba(37, 99, 235, 0.04) 50%,
     transparent 70%
   );
-  filter: blur(40px);
-  opacity: 0.9;
+  filter: blur(48px);
+  opacity: 0.85;
 }
 
 .stripe-gradient-text {
-  background: linear-gradient(135deg, #533afd 0%, #8087ff 35%, #8a8f98 100%);
+  background: linear-gradient(135deg, #3182ce 0%, #533afd 40%, #52525b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

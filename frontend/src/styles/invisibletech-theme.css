@@ -1,0 +1,905 @@
+/* Invisibletech — editorial sketchbook on graph paper */
+
+.marketing-invisible {
+  --color-carbon-ink: #0f0f0f;
+  --color-graphite: #222222;
+  --color-iron: #4c4c4c;
+  --color-steel: #606060;
+  --color-slate: #898989;
+  --color-fog: #9d9d9d;
+  --color-silver: #b2b2b2;
+  --color-pewter: #c6c6c6;
+  --color-ash: #dbdbdb;
+  --color-mist: #efefef;
+  --color-canvas-white: #ffffff;
+  --color-ice-blue: #e6f1ff;
+  --color-cobalt-spark: #0c76fe;
+  --color-align-blue: #2563eb;
+  --color-align-orange: #f97316;
+  --color-align-peach: #fff3eb;
+  --color-align-sky: #eef5ff;
+  --color-align-lavender: #f0f4ff;
+  --color-lime-glow: #dcf58f;
+
+  --font-apk-galeria: 'Newsreader', 'Georgia', 'Times New Roman', serif;
+  --font-apkpraktikal: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  --page-max-width: 1280px;
+  --section-gap: 80px;
+  --card-padding: 24px;
+
+  --radius-cards: 12px;
+  --radius-pills: 9999px;
+
+  font-family: var(--font-apk-galeria);
+  color: var(--color-carbon-ink);
+  background-color: var(--color-canvas-white);
+}
+
+/* Graph paper canvas */
+.marketing-invisible .inv-graph-paper {
+  background-color: var(--color-canvas-white);
+  background-image: radial-gradient(circle, var(--color-pewter) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.marketing-invisible .inv-container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .marketing-invisible .inv-container {
+    padding-inline: 40px;
+  }
+}
+
+.marketing-invisible .inv-section {
+  padding-block: var(--section-gap);
+}
+
+/* Typography */
+.marketing-invisible .inv-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-apkpraktikal);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-align-orange);
+  flex-shrink: 0;
+}
+
+.marketing-invisible .inv-display {
+  font-family: var(--font-apk-galeria);
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-display-muted {
+  color: var(--color-slate);
+}
+
+/* Hero typewriter — grid sizer locks height; live text overlays without shifting layout */
+.marketing-invisible .inv-hero-typewriter-wrap {
+  display: grid;
+  width: 100%;
+  max-width: 900px;
+  align-items: start;
+}
+
+.marketing-invisible .inv-hero-typewriter-wrap > .inv-hero-typewriter {
+  grid-area: 1 / 1;
+}
+
+.marketing-invisible .inv-hero-typewriter-sizer {
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.marketing-invisible .inv-hero-typewriter-live {
+  z-index: 1;
+}
+
+.marketing-invisible .inv-hero-typewriter {
+  line-height: 1.08;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.marketing-invisible .inv-hero-typewriter-cycling {
+  display: inline;
+  vertical-align: baseline;
+}
+
+.marketing-invisible .inv-typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 400;
+  color: var(--color-cobalt-spark);
+  transform: translateY(-0.02em);
+}
+
+.marketing-invisible .inv-heading-lg {
+  font-family: var(--font-apk-galeria);
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-heading {
+  font-family: var(--font-apk-galeria);
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-body {
+  font-family: var(--font-apk-galeria);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-iron);
+}
+
+.marketing-invisible .inv-body-sm {
+  font-family: var(--font-apk-galeria);
+  font-size: 14px;
+  line-height: 1.43;
+  color: var(--color-iron);
+}
+
+.marketing-invisible .inv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-apk-galeria);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-cobalt-spark);
+  transition: opacity 160ms ease;
+}
+
+.marketing-invisible .inv-link:hover {
+  opacity: 0.75;
+}
+
+/* Buttons */
+.marketing-invisible .inv-btn-lime {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pills);
+  border: none;
+  background: var(--color-lime-glow);
+  font-family: var(--font-apkpraktikal);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-carbon-ink);
+  transition: opacity 160ms ease;
+}
+
+.marketing-invisible .inv-btn-lime:hover {
+  opacity: 0.88;
+}
+
+.marketing-invisible .inv-btn-black {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pills);
+  border: none;
+  background: var(--color-carbon-ink);
+  font-family: var(--font-apkpraktikal);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-canvas-white);
+  transition: opacity 160ms ease;
+}
+
+.marketing-invisible .inv-btn-black:hover {
+  opacity: 0.88;
+}
+
+.marketing-invisible .inv-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--color-ash);
+  background: var(--color-canvas-white);
+  font-family: var(--font-apkpraktikal);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-carbon-ink);
+  transition: background 160ms ease;
+}
+
+.marketing-invisible .inv-btn-ghost:hover {
+  background: var(--color-mist);
+}
+
+/* Cards & panels */
+.marketing-invisible .inv-card {
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-ash);
+  background: var(--color-canvas-white);
+  padding: var(--card-padding);
+}
+
+.marketing-invisible .inv-ice-panel {
+  border-radius: var(--radius-cards);
+  background: var(--color-ice-blue);
+  padding: var(--card-padding);
+}
+
+.marketing-invisible .inv-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--color-ash);
+  background: var(--color-mist);
+  font-family: var(--font-apkpraktikal);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-carbon-ink);
+}
+
+/* Side nav tab (auto-cycle sections) */
+.marketing-invisible .inv-side-tab {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-ash);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.marketing-invisible .inv-side-tab:last-child {
+  border-bottom: none;
+}
+
+.marketing-invisible .inv-side-tab-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-apkpraktikal);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-steel);
+  transition: color 160ms ease;
+}
+
+.marketing-invisible .inv-side-tab[data-active='true'] .inv-side-tab-label {
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .inv-side-tab-arrow {
+  color: var(--color-cobalt-spark);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.marketing-invisible .inv-side-tab[data-active='true'] .inv-side-tab-arrow {
+  opacity: 1;
+}
+
+.marketing-invisible .inv-progress-bar {
+  height: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: var(--color-ash);
+}
+
+.marketing-invisible .inv-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: var(--color-align-blue);
+}
+
+/* Mock window */
+.marketing-invisible .inv-mock-outer {
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-ash);
+  background: var(--color-canvas-white);
+  padding: var(--card-padding);
+}
+
+.marketing-invisible .inv-mock-inner {
+  border-radius: 8px;
+  border: 1px solid var(--color-ash);
+  overflow: hidden;
+}
+
+.marketing-invisible .inv-mock-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-ash);
+  background: var(--color-mist);
+}
+
+.marketing-invisible .inv-mock-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-ash);
+}
+
+.marketing-invisible .inv-mock-body {
+  padding: 16px;
+  background: var(--color-canvas-white);
+}
+
+/* Pill outline CTA — mas3 / mok1 style */
+.marketing-invisible .inv-btn-outline-blue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: var(--radius-pills);
+  border: 1.5px solid var(--color-align-blue);
+  background: var(--color-canvas-white);
+  font-family: var(--font-apk-galeria);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-align-blue);
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+
+.marketing-invisible .inv-btn-outline-blue:hover {
+  background: var(--color-align-sky);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+}
+
+/* Feature spotlight bands — warm peach & cool sky */
+.marketing-invisible .inv-feature-band {
+  border-radius: 20px;
+  padding: clamp(28px, 5vw, 48px);
+}
+
+.marketing-invisible .inv-feature-band--peach {
+  background: var(--color-align-peach);
+  border: 1px solid rgba(249, 115, 22, 0.12);
+}
+
+.marketing-invisible .inv-feature-band--sky {
+  background: var(--color-align-sky);
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.marketing-invisible .inv-feature-band--lavender {
+  background: var(--color-align-lavender);
+  border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+/* Rich mockup stage — gradient backdrop + floating product UI */
+.marketing-invisible .inv-mock-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: clamp(20px, 4vw, 36px);
+  min-height: 320px;
+}
+
+.marketing-invisible .inv-mock-stage--blue {
+  background: linear-gradient(135deg, #dbeafe 0%, #eef5ff 45%, #f8fafc 100%);
+}
+
+.marketing-invisible .inv-mock-stage--teal {
+  background: linear-gradient(135deg, #ccfbf1 0%, #e0f2fe 50%, #f0f9ff 100%);
+}
+
+.marketing-invisible .inv-mock-stage--warm {
+  background: linear-gradient(135deg, #ffedd5 0%, #fff3eb 50%, #fefce8 100%);
+}
+
+.marketing-invisible .inv-mock-stage-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow:
+    0 2px 8px rgba(15, 15, 15, 0.04),
+    0 12px 40px rgba(15, 15, 15, 0.1),
+    0 24px 64px rgba(37, 99, 235, 0.08);
+}
+
+/* Together.ai-style expandable side tabs */
+.marketing-invisible .inv-platform-tab {
+  display: block;
+  width: 100%;
+  padding: 20px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-ash);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.marketing-invisible .inv-platform-tab:last-child {
+  border-bottom: none;
+}
+
+.marketing-invisible .inv-platform-tab[data-active='false'] {
+  opacity: 0.55;
+}
+
+.marketing-invisible .inv-platform-tab[data-active='false']:hover {
+  opacity: 0.85;
+}
+
+.marketing-invisible .inv-platform-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-align-sky);
+  color: var(--color-align-blue);
+  flex-shrink: 0;
+}
+
+.marketing-invisible .inv-platform-tab[data-active='false'] .inv-platform-tab-icon {
+  background: var(--color-mist);
+  color: var(--color-steel);
+}
+
+.marketing-invisible .inv-platform-tab-title {
+  font-family: var(--font-apk-galeria);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-carbon-ink);
+  letter-spacing: -0.01em;
+}
+
+.marketing-invisible .inv-platform-tab-desc {
+  font-family: var(--font-apk-galeria);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-iron);
+  margin-top: 10px;
+  max-width: 420px;
+}
+
+.marketing-invisible .inv-accent-orange {
+  color: var(--color-align-orange);
+}
+
+.marketing-invisible .inv-accent-blue {
+  color: var(--color-align-blue);
+}
+
+/* Expand-on-hover project gallery */
+.marketing-invisible .inv-project-gallery-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  height: 420px;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.marketing-invisible .inv-project-gallery-item {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex-grow 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marketing-invisible .inv-project-gallery-item:hover {
+  flex-grow: 4;
+}
+
+.marketing-invisible .inv-project-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marketing-invisible .inv-project-gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+.marketing-invisible .inv-project-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 15, 15, 0.75) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.marketing-invisible .inv-project-gallery-item:hover .inv-project-gallery-overlay {
+  opacity: 1;
+}
+
+.marketing-invisible .inv-project-gallery-industry {
+  font-family: var(--font-apkpraktikal);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-align-orange);
+  margin-bottom: 4px;
+}
+
+/* Nav overrides — white sticky bar, keep mega-menu structure */
+.marketing-invisible .linear-nav {
+  height: 64px;
+  background: var(--color-canvas-white);
+  border-bottom: 1px solid var(--color-ash);
+}
+
+.marketing-invisible .linear-nav-link {
+  font-family: var(--font-apk-galeria);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-carbon-ink);
+  border-radius: var(--radius-pills);
+  padding: 8px 14px;
+}
+
+.marketing-invisible .linear-nav-link:hover,
+.marketing-invisible .linear-nav-link[data-active='true'] {
+  color: var(--color-carbon-ink);
+  background: var(--color-mist);
+}
+
+.marketing-invisible .mega-menu-trigger-active {
+  background: var(--color-mist);
+  color: var(--color-carbon-ink);
+  border-radius: var(--radius-pills);
+}
+
+.marketing-invisible .mega-menu-dropdown {
+  border: 1px solid var(--color-ash);
+  background: var(--color-canvas-white);
+  box-shadow: none;
+  border-radius: var(--radius-cards);
+}
+
+.marketing-invisible .mega-menu-column-title {
+  font-family: var(--font-apkpraktikal);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-slate);
+}
+
+.marketing-invisible .mega-menu-link-label {
+  font-family: var(--font-apk-galeria);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .mega-menu-link-desc {
+  color: var(--color-iron);
+}
+
+.marketing-invisible .mega-menu-link:hover {
+  background: var(--color-mist);
+}
+
+.marketing-invisible .mega-menu-featured {
+  background: var(--color-ice-blue);
+  border: 1px solid var(--color-ash);
+}
+
+.marketing-invisible .mega-menu-featured-eyebrow {
+  font-family: var(--font-apkpraktikal);
+  color: var(--color-cobalt-spark);
+  letter-spacing: 0.12em;
+}
+
+.marketing-invisible .mega-menu-featured-title {
+  font-family: var(--font-apk-galeria);
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .mega-menu-featured-body {
+  font-family: var(--font-apk-galeria);
+  color: var(--color-iron);
+}
+
+.marketing-invisible .mega-menu-featured-cta {
+  font-family: var(--font-apk-galeria);
+  color: var(--color-cobalt-spark);
+}
+
+.marketing-invisible .linear-btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pills);
+  border: none;
+  background: var(--color-lime-glow);
+  font-family: var(--font-apkpraktikal);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-carbon-ink);
+}
+
+.marketing-invisible .linear-btn-pill:hover {
+  opacity: 0.88;
+}
+
+/* Footer */
+.marketing-invisible .inv-footer {
+  border-top: 1px solid var(--color-ash);
+  background: var(--color-canvas-white);
+  padding-block: 64px 40px;
+}
+
+.marketing-invisible .inv-footer-heading {
+  font-family: var(--font-apkpraktikal);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-slate);
+  margin-bottom: 16px;
+}
+
+.marketing-invisible .inv-footer-link {
+  font-family: var(--font-apk-galeria);
+  font-size: 14px;
+  color: var(--color-iron);
+  transition: color 160ms ease;
+}
+
+.marketing-invisible .inv-footer-link:hover {
+  color: var(--color-carbon-ink);
+}
+
+/* Stats band */
+.marketing-invisible .inv-stats-band {
+  border-block: 1px solid var(--color-ash);
+  padding-block: 48px;
+}
+
+.marketing-invisible .inv-stat-value {
+  font-family: var(--font-apk-galeria);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-carbon-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.marketing-invisible .inv-stat-label {
+  font-family: var(--font-apkpraktikal);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-iron);
+  margin-top: 4px;
+}
+
+/* Trust strip marquee */
+.marketing-invisible .inv-trust-marquee {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.marketing-invisible .inv-trust-marquee-inner {
+  animation: inv-marquee var(--duration, 38s) linear infinite;
+}
+
+.marketing-invisible .inv-trust-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-apkpraktikal);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-carbon-ink);
+  white-space: nowrap;
+}
+
+.marketing-invisible .inv-trust-marquee-item::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-cobalt-spark);
+  flex-shrink: 0;
+}
+
+@keyframes inv-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketing-invisible .inv-trust-marquee-inner {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: var(--page-max-width);
+    margin-inline: auto;
+    padding-inline: 24px;
+    gap: 12px 24px;
+  }
+
+  .marketing-invisible .inv-trust-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .marketing-invisible .inv-trust-marquee-inner > .inv-trust-marquee-track:last-child {
+    display: none;
+  }
+}
+
+/* Hero shooting stars — sketch ink trail */
+.marketing-invisible .inv-shooting-star {
+  position: absolute;
+  left: -120px;
+  z-index: 0;
+}
+
+.marketing-invisible .inv-shooting-star-track {
+  animation: inv-shooting-star-drift var(--inv-shoot-duration, 5s) linear infinite;
+  animation-delay: var(--inv-shoot-delay, 0s);
+  opacity: 0;
+}
+
+@keyframes inv-shooting-star-drift {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateX(calc(100vw + 160px));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketing-invisible .inv-shooting-star-track {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Starfall aurora — sketch palette on graph paper */
+.marketing-invisible .inv-starfall-bg {
+  mix-blend-mode: soft-light;
+}
+
+.marketing-invisible .inv-starfall-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 85% 12%, rgba(12, 118, 254, 0.14) 0%, transparent 58%),
+    radial-gradient(ellipse 50% 40% at 10% 78%, rgba(220, 245, 143, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 55% 55%, rgba(147, 130, 255, 0.08) 0%, transparent 50%);
+}
+
+/* Hero — vivid aurora (normal blend; soft-light washes out on white graph paper) */
+.marketing-invisible .inv-starfall-bg--hero {
+  mix-blend-mode: normal;
+}
+
+.marketing-invisible .inv-starfall-bg--hero canvas {
+  position: relative;
+  z-index: 1;
+  filter: saturate(1.12) brightness(1.08);
+}
+
+.marketing-invisible .inv-starfall-bg--hero::before {
+  background:
+    radial-gradient(ellipse 70% 60% at 76% 14%, rgba(147, 197, 253, 0.32) 0%, transparent 65%),
+    radial-gradient(ellipse 62% 52% at 16% 66%, rgba(254, 243, 199, 0.34) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 46% at 52% 44%, rgba(254, 215, 170, 0.28) 0%, transparent 58%),
+    radial-gradient(ellipse 40% 36% at 68% 64%, rgba(191, 219, 254, 0.2) 0%, transparent 54%);
+}
+
+.marketing-invisible .inv-starfall-float {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: var(--inv-float-delay, 0s);
+}
+
+.marketing-invisible .inv-starfall-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-ash) 20%,
+    var(--color-ash) 80%,
+    transparent
+  );
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketing-invisible .inv-starfall-float {
+    animation: none;
+  }
+}

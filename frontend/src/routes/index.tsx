@@ -12,6 +12,7 @@ import { IndustriesPage } from '@/pages/IndustriesPage';
 import { ThankYouPage } from '@/pages/ThankYouPage';
 import { ProjectsPage } from '@/pages/ProjectsPage';
 import { ProjectDashboardPage } from '@/pages/ProjectDashboardPage';
+import { PortfolioDemoPage } from '@/pages/PortfolioDemoPage';
 import { OnboardingPage } from '@/pages/OnboardingPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { AdminLoginPage } from '@/pages/admin/AdminLoginPage';
@@ -35,6 +36,9 @@ export function AppRoutes() {
         <Route path="projects/:slug" element={<ProjectDashboardPage />} />
         <Route path="thank-you" element={<ThankYouPage />} />
       </Route>
+
+      {/* Starfall portfolio component demo — self-contained nav, no site chrome */}
+      <Route path="portfolio-demo" element={<PortfolioDemoPage />} />
 
       {/* Public onboarding — anyone can register */}
       <Route path="onboarding" element={<OnboardingPage />} />

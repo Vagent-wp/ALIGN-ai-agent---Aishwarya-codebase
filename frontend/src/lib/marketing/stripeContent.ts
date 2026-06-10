@@ -56,7 +56,7 @@ export const pricingTiers: PricingTier[] = [
     description: `Join ${BRAND.platform} and get discovered by AI-powered matching.`,
     features: [
       'Public profile on ALIGN Network',
-      'WhatsApp onboarding via Aishwarya',
+      'WhatsApp onboarding via Kaya',
       'Semantic discovery & match cards',
       'Profile completeness scoring',
     ],

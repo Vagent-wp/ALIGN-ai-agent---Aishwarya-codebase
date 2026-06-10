@@ -15,8 +15,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        brand: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        serif: ['Newsreader', 'Georgia', 'Times New Roman', 'serif'],
+        brand: ['Newsreader', 'Georgia', 'serif'],
+        mono: ['IBM Plex Mono', 'JetBrains Mono', 'ui-monospace', 'monospace'],
+        label: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
         poppins: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
@@ -60,6 +62,10 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
         'fade-in-up': {
           from: { opacity: '0', transform: 'translateY(16px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
@@ -103,6 +109,7 @@ const config: Config = {
         'plasma-drift-1': 'plasma-drift-1 22s ease-in-out infinite',
         'plasma-drift-2': 'plasma-drift-2 18s ease-in-out infinite',
         'cursor-blink': 'cursor-blink 1s step-end infinite',
+        float: 'float 6s ease-in-out infinite',
       },
     },
   },

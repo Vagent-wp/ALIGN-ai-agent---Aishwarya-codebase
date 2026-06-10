@@ -21,7 +21,7 @@ const compositeHeights = {
   sm: 'h-9',
   md: 'h-11',
   lg: 'h-14 md:h-16',
-  nav: 'h-10 sm:h-11 md:h-12',
+  nav: 'h-11 sm:h-12 md:h-14',
 };
 
 const markOnlyHeights = {
@@ -35,7 +35,7 @@ const mergedHeights = {
   sm: 'h-9 md:h-10',
   md: 'h-11 md:h-12',
   lg: 'h-14 md:h-[4.5rem]',
-  nav: 'h-10 sm:h-11 md:h-12',
+  nav: 'h-11 sm:h-12 md:h-14',
 };
 
 function ComposedLogo({
@@ -45,16 +45,21 @@ function ComposedLogo({
   size: NonNullable<AlignBrandProps['size']>;
   surface: 'dark' | 'light';
 }) {
-  if (surface === 'light') {
+  /* Nav uses mark + wordmark on both surfaces — merge.png reads too small in the bar */
+  const useMerged = surface === 'light' && size !== 'nav';
+
+  if (useMerged) {
     return (
       <img
         src={LOGO.merged}
         alt={`${BRAND.company} — ${BRAND.platform}`}
-        className={cn('w-auto max-w-[min(100%,260px)] object-contain object-left', mergedHeights[size])}
+        className={cn('w-auto max-w-[min(100%,280px)] object-contain object-left', mergedHeights[size])}
         draggable={false}
       />
     );
   }
+
+  const dividerClass = surface === 'dark' ? 'bg-[#d0d6e0]/35' : 'bg-[#dbdbdb]';
 
   return (
     <div className={cn('flex items-center gap-2 sm:gap-2.5', compositeHeights[size])}>
@@ -65,14 +70,11 @@ function ComposedLogo({
         draggable={false}
         aria-hidden
       />
-      <span
-        className="h-[72%] w-px shrink-0 bg-[#d0d6e0]/35"
-        aria-hidden
-      />
+      <span className={cn('h-[72%] w-px shrink-0', dividerClass)} aria-hidden />
       <img
         src={LOGO.wordmark}
         alt={`${BRAND.company}`}
-        className="h-full w-auto max-w-[min(52vw,168px)] object-contain object-left sm:max-w-[190px] md:max-w-[210px]"
+        className="h-full w-auto max-w-[min(52vw,180px)] object-contain object-left sm:max-w-[200px] md:max-w-[240px]"
         draggable={false}
       />
     </div>

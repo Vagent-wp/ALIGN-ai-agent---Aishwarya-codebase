@@ -1,0 +1,110 @@
+/* ALIGN capture palette — from logo/Capture.PNG feature card grid */
+
+.marketing-linear {
+  --align-peach: #fff5eb;
+  --align-peach-border: #f5e6d8;
+  --align-sky: #ebf5ff;
+  --align-sky-border: #d4e8ff;
+  --align-mint: #f0fff4;
+  --align-mint-border: #c6ecd4;
+  --align-lavender: #f5f3ff;
+  --align-lavender-border: #e4dffd;
+  --align-brand-blue: #3182ce;
+  --align-icon-well: #e8f2fc;
+  --align-page: #ffffff;
+
+  --color-indigo: var(--align-brand-blue);
+  --color-acid-lime: var(--align-brand-blue);
+  --color-onyx: var(--align-page);
+}
+
+/* ——— Section bands ——— */
+
+.align-band-peach {
+  background-color: var(--align-peach);
+}
+
+.align-band-sky {
+  background-color: var(--align-sky);
+}
+
+.align-band-mint {
+  background-color: var(--align-mint);
+}
+
+.align-band-lavender {
+  background-color: var(--align-lavender);
+}
+
+.align-band-white {
+  background-color: var(--align-page);
+}
+
+.align-hero-wash {
+  background:
+    radial-gradient(ellipse 80% 60% at 90% 10%, rgba(235, 245, 255, 0.9) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 10% 90%, rgba(255, 245, 235, 0.75) 0%, transparent 50%),
+    linear-gradient(180deg, var(--align-sky) 0%, var(--align-page) 72%);
+}
+
+/* ——— Capture-style feature cards ——— */
+
+.align-capture-card {
+  border-radius: 16px;
+  padding: 28px 32px;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.align-capture-card-peach {
+  background: var(--align-peach);
+  border-color: var(--align-peach-border);
+}
+
+.align-capture-card-sky {
+  background: var(--align-sky);
+  border-color: var(--align-sky-border);
+}
+
+.align-capture-card-mint {
+  background: var(--align-mint);
+  border-color: var(--align-mint-border);
+}
+
+.align-capture-card-lavender {
+  background: var(--align-lavender);
+  border-color: var(--align-lavender-border);
+}
+
+.align-capture-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--align-icon-well);
+  color: var(--align-brand-blue);
+  flex-shrink: 0;
+}
+
+/* Pastel utilities — capture values */
+.pastel-card-peach {
+  background: var(--align-peach);
+  border: 1px solid var(--align-peach-border);
+}
+
+.pastel-card-sky {
+  background: var(--align-sky);
+  border: 1px solid var(--align-sky-border);
+}
+
+.pastel-card-mint {
+  background: var(--align-mint);
+  border: 1px solid var(--align-mint-border);
+}
+
+.pastel-card-lavender {
+  background: var(--align-lavender);
+  border: 1px solid var(--align-lavender-border);
+}

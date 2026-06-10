@@ -10,11 +10,13 @@ export function MarketingIllustrationFrame({ children, className }: MarketingIll
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-2xl bg-white p-3 shadow-[0_12px_48px_rgba(15,23,42,0.1)] ring-1 ring-black/[0.05] sm:p-4',
+        'overflow-hidden rounded-2xl bg-white p-2 shadow-[0_20px_60px_rgba(49,130,206,0.14),0_8px_24px_rgba(15,23,42,0.08)] ring-1 ring-black/[0.04] sm:p-3',
         className
       )}
     >
-      <div className="overflow-hidden rounded-xl bg-gradient-to-br from-slate-50 to-white">{children}</div>
+      <div className="overflow-hidden rounded-xl bg-gradient-to-br from-white via-slate-50/40 to-white">
+        {children}
+      </div>
     </div>
   );
 }

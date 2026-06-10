@@ -130,9 +130,9 @@ export const portfolioProjects: PortfolioProject[] = [
     slug: 'align-network',
     title: 'ALIGN Network',
     industry: 'AI Ecosystem',
-    summary: 'AI-powered business discovery and opportunity matching powered by Aishwarya.',
+    summary: 'AI-powered business discovery and opportunity matching powered by Kaya.',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&q=80',
-    features: ['Business discovery', 'Opportunity matching', 'Aishwarya AI assistant', 'Network graph', 'Lead generation'],
+    features: ['Business discovery', 'Opportunity matching', 'Kaya AI agent', 'Network graph', 'Lead generation'],
     stats: [
       { label: 'Profiles', value: '10k+' },
       { label: 'Matches / day', value: '1.2k' },

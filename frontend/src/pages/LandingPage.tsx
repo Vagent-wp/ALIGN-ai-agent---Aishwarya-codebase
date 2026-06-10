@@ -1,40 +1,34 @@
-import { AlignHero } from '@/components/marketing/AlignHero';
-import { PerplexityDiscoverySection } from '@/components/marketing/perplexity/PerplexityDiscoverySection';
-import { ElevenLabsProductSection } from '@/components/marketing/elevenlabs/ElevenLabsProductSection';
-import { VercelPlatformSection } from '@/components/marketing/vercel/VercelPlatformSection';
-import { StripeProductShowcase } from '@/components/marketing/stripe/StripeProductShowcase';
-import { PricingSection } from '@/components/marketing/stripe/PricingSection';
-import { WhatWeDoSection } from '@/components/marketing/WhatWeDoSection';
-import { PastelFeatureCards } from '@/components/marketing/PastelFeatureCards';
-import { ServiceCategoriesSection } from '@/components/marketing/ServiceCategoriesSection';
-import { IndustriesSection } from '@/components/marketing/IndustriesSection';
+import { InvisibleHero } from '@/components/marketing/invisible/InvisibleHero';
+import { InvisibleTrustStrip } from '@/components/marketing/invisible/InvisibleTrustStrip';
+import { InvisibleIntroSection } from '@/components/marketing/invisible/InvisibleIntroSection';
+import { FeatureSpotlightBand } from '@/components/marketing/invisible/FeatureSpotlightBand';
+import { InvisiblePlatformShowcase } from '@/components/marketing/invisible/InvisiblePlatformShowcase';
+import { KayaAgentShowcaseSection } from '@/components/marketing/notion/KayaAgentShowcaseSection';
+import { InvisibleNetworkShowcase } from '@/components/marketing/invisible/InvisibleNetworkShowcase';
+import { InvisibleProductsSection } from '@/components/marketing/invisible/InvisibleProductsSection';
 import { ProjectsGallerySection } from '@/components/marketing/ProjectsGallerySection';
-import { FlagshipProductsSection } from '@/components/marketing/FlagshipProductsSection';
-import { StatsBand, HowItWorksSection, MissionSection, FinalCTA } from '@/components/marketing/MissionAndCTA';
+import {
+  InvisibleStatsBand,
+  InvisibleHowItWorks,
+  InvisibleFinalCTA,
+} from '@/components/marketing/invisible/InvisibleClosingSections';
 
-/**
- * Hybrid homepage — 40% Linear + 25% Stripe + 20% Perplexity + 10% ElevenLabs + 5% Vercel
- * Hero → Trust → Intro → AI Discovery → Highlights → ElevenLabs → Stripe → … → Vercel → Pricing → CTA
- */
+/** Editorial sketchbook homepage — rich mockups, blue & orange accents */
 export function LandingPage() {
   return (
     <div className="overflow-x-hidden">
-      <AlignHero />
-      <WhatWeDoSection />
-      <PerplexityDiscoverySection />
-      <PastelFeatureCards />
-      <ElevenLabsProductSection />
-      <StripeProductShowcase />
-      <ServiceCategoriesSection />
-      <IndustriesSection />
+      <InvisibleHero />
+      <InvisibleTrustStrip />
+      <InvisibleIntroSection />
+      <FeatureSpotlightBand />
+      <InvisiblePlatformShowcase />
+      <KayaAgentShowcaseSection />
+      <InvisibleNetworkShowcase />
+      <InvisibleProductsSection />
       <ProjectsGallerySection />
-      <FlagshipProductsSection />
-      <StatsBand />
-      <HowItWorksSection />
-      <MissionSection />
-      <VercelPlatformSection />
-      <PricingSection />
-      <FinalCTA />
+      <InvisibleStatsBand />
+      <InvisibleHowItWorks />
+      <InvisibleFinalCTA />
     </div>
   );
 }

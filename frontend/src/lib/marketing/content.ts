@@ -1,10 +1,10 @@
 import { BRAND } from '@/lib/brand';
 
 export const heroTypewriterPhrases = [
-  'that help businesses scale',
-  'with AI & automation',
   'through intelligent systems',
-  'where opportunities find people',
+  'with AI & automation',
+  'that help businesses scale',
+  'for founders, teams, and enterprises',
 ];
 
 export const heroTrustBullets = [
