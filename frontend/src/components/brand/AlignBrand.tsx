@@ -5,7 +5,7 @@ import { BRAND, LOGO } from '@/lib/brand';
 interface AlignBrandProps {
   /** Full wordmark (mark + divider + text) or icon-only mark */
   variant?: 'full' | 'icon';
-  size?: 'sm' | 'md' | 'lg' | 'nav';
+  size?: 'sm' | 'md' | 'lg' | 'footer' | 'nav';
   /**
    * dark — compose 1.png + 2.png (black PNG bg blends on dark nav)
    * light — use merge.png (white background, for footer & light pages)
@@ -18,24 +18,43 @@ interface AlignBrandProps {
 }
 
 const compositeHeights = {
-  sm: 'h-9',
-  md: 'h-11',
-  lg: 'h-14 md:h-16',
+  sm: 'h-10 md:h-11',
+  md: 'h-12 md:h-14',
+  lg: 'h-16 md:h-[4.5rem]',
+  footer: 'h-14 md:h-16 lg:h-[4.5rem]',
   nav: 'h-9 sm:h-10 md:h-11',
 };
 
 const markOnlyHeights = {
-  sm: 'h-8 w-8',
-  md: 'h-10 w-10',
+  sm: 'h-9 w-9',
+  md: 'h-11 w-11',
   lg: 'h-12 w-12',
+  footer: 'h-12 w-12',
   nav: 'h-9 w-9 sm:h-10 sm:w-10',
 };
 
 const mergedHeights = {
-  sm: 'h-9 md:h-10',
-  md: 'h-11 md:h-12',
-  lg: 'h-14 md:h-[4.5rem]',
+  sm: 'h-10 md:h-11',
+  md: 'h-12 md:h-14',
+  lg: 'h-16 md:h-[4.5rem]',
+  footer: 'h-14 md:h-16 lg:h-[4.5rem]',
   nav: 'h-9 sm:h-10 md:h-11',
+};
+
+const wordmarkMaxWidths: Record<NonNullable<AlignBrandProps['size']>, string> = {
+  sm: 'max-w-[min(52vw,200px)] sm:max-w-[220px]',
+  md: 'max-w-[min(55vw,220px)] sm:max-w-[260px] md:max-w-[280px]',
+  lg: 'max-w-[min(60vw,260px)] sm:max-w-[300px] md:max-w-[340px]',
+  footer: 'max-w-[min(65vw,280px)] sm:max-w-[320px] md:max-w-[360px]',
+  nav: 'max-w-[min(52vw,180px)] sm:max-w-[200px] md:max-w-[240px]',
+};
+
+const mergedMaxWidths: Record<NonNullable<AlignBrandProps['size']>, string> = {
+  sm: 'max-w-[min(100%,220px)]',
+  md: 'max-w-[min(100%,280px)]',
+  lg: 'max-w-[min(100%,340px)]',
+  footer: 'max-w-[min(100%,360px)]',
+  nav: 'max-w-[min(100%,280px)]',
 };
 
 function ComposedLogo({
@@ -45,15 +64,15 @@ function ComposedLogo({
   size: NonNullable<AlignBrandProps['size']>;
   surface: 'dark' | 'light';
 }) {
-  /* Nav uses mark + wordmark on both surfaces — merge.png reads too small in the bar */
-  const useMerged = surface === 'light' && size !== 'nav';
+  /* Nav + footer/lg use composed mark + wordmark for clarity; merge.png only on compact sm */
+  const useMerged = surface === 'light' && size === 'sm';
 
   if (useMerged) {
     return (
       <img
         src={LOGO.merged}
         alt={`${BRAND.company} — ${BRAND.platform}`}
-        className={cn('w-auto max-w-[min(100%,280px)] object-contain object-left', mergedHeights[size])}
+        className={cn('w-auto object-contain object-left', mergedMaxWidths[size], mergedHeights[size])}
         draggable={false}
       />
     );
@@ -74,7 +93,7 @@ function ComposedLogo({
       <img
         src={LOGO.wordmark}
         alt={`${BRAND.company}`}
-        className="h-full w-auto max-w-[min(52vw,180px)] object-contain object-left sm:max-w-[200px] md:max-w-[240px]"
+        className={cn('h-full w-auto object-contain object-left', wordmarkMaxWidths[size])}
         draggable={false}
       />
     </div>

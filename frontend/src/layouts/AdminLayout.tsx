@@ -27,7 +27,7 @@ export function AdminLayout() {
       <header className="border-b border-border/60 bg-card">
         <div className="page-shell flex min-h-14 items-center justify-between py-3">
           <div className="flex items-center gap-4">
-            <AlignBrand variant="full" size="sm" linkToHome />
+            <AlignBrand variant="full" size="md" linkToHome />
             <span className="hidden rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary sm:inline">
               Admin
             </span>

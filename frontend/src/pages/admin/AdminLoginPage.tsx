@@ -40,7 +40,7 @@ export function AdminLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="dashboard-panel w-full max-w-md p-8">
         <div className="mb-6 flex justify-center">
-          <AlignBrand variant="full" size="sm" linkToHome />
+          <AlignBrand variant="full" size="md" linkToHome />
         </div>
         <h1 className="text-center font-poppins text-xl font-bold">Admin Dashboard</h1>
         <p className="mt-1 text-center text-sm text-muted-foreground">

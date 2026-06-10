@@ -19,7 +19,7 @@ export function SiteHeader() {
   return (
     <header className="glass sticky top-0 z-30 border-b border-border/40 pt-safe">
       <div className="page-shell flex min-h-16 items-center justify-between gap-4">
-        <AlignBrand variant={isMobile ? 'icon' : 'full'} size="sm" />
+        <AlignBrand variant={isMobile ? 'icon' : 'full'} size="md" />
 
         {!isMobile && (
           <nav className="hidden items-center gap-6 md:flex">

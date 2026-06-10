@@ -21,7 +21,6 @@ export const marqueeIndustries = [
   'Real Estate',
   'Manufacturing',
   'Education',
-  'Professional Services',
 ];
 
 export interface ServiceCategory {
@@ -130,19 +129,67 @@ export interface IndustryItem {
   id: string;
   title: string;
   label: string;
+  summary: string;
   projects: string[];
 }
 
 export const industries: IndustryItem[] = [
-  { id: 'pharma', title: 'Pharmaceutical', label: 'Pharmaceutical', projects: ['SFA Systems', 'DCR Management', 'E-Detailing', 'Doctor Engagement Platforms'] },
-  { id: 'events', title: 'Events & Media', label: 'Events & Media', projects: ['Event Management Website', 'AI Lead Generation Systems', 'WhatsApp Automation', 'Voice AI Systems'] },
-  { id: 'recruitment', title: 'Recruitment & HR', label: 'Recruitment & HR', projects: ['Recruitment Platform', 'Candidate Portals', 'Resume Search Systems', 'ATS Solutions'] },
-  { id: 'startups', title: 'Startups & SaaS', label: 'Startups & SaaS', projects: ['MVP Development', 'SaaS Platforms', 'AI Products', 'Automation Systems'] },
-  { id: 'agencies', title: 'Marketing & Agencies', label: 'Marketing & Agencies', projects: ['CRM Systems', 'Lead Generation Tools', 'WhatsApp Agents', 'Automation Platforms'] },
-  { id: 'realestate', title: 'Real Estate', label: 'Real Estate', projects: ['AI Lead Systems', 'CRM Platforms', 'Virtual Tours', 'Property Discovery Systems'] },
-  { id: 'manufacturing', title: 'Manufacturing', label: 'Manufacturing', projects: ['CRM Systems', 'Business Automation', 'Reporting Dashboards', 'Internal Management Systems'] },
-  { id: 'education', title: 'Education', label: 'Education', projects: ['Learning Platforms', 'Knowledge Systems', 'AI Assistants', 'Student Portals'] },
-  { id: 'professional', title: 'Professional Services', label: 'Professional Services', projects: ['Legal Firms', 'Consultants', 'CA Firms', 'HR Agencies', 'Business Advisors'] },
+  {
+    id: 'pharma',
+    title: 'Pharmaceutical',
+    label: 'Pharmaceutical',
+    summary: 'Field force automation, compliance workflows, and doctor engagement for regulated pharma operations.',
+    projects: ['SFA Systems', 'DCR Management', 'E-Detailing', 'Doctor Engagement Platforms'],
+  },
+  {
+    id: 'events',
+    title: 'Events & Media',
+    label: 'Events & Media',
+    summary: 'Event platforms, AI lead capture, and automated outreach for media and live experiences.',
+    projects: ['Event Management Website', 'AI Lead Generation Systems', 'WhatsApp Automation', 'Voice AI Systems'],
+  },
+  {
+    id: 'recruitment',
+    title: 'Recruitment & HR',
+    label: 'Recruitment & HR',
+    summary: 'Candidate portals, resume search, and ATS platforms built for high-volume hiring teams.',
+    projects: ['Recruitment Platform', 'Candidate Portals', 'Resume Search Systems', 'ATS Solutions'],
+  },
+  {
+    id: 'startups',
+    title: 'Startups & SaaS',
+    label: 'Startups & SaaS',
+    summary: 'MVPs, SaaS products, and AI-native platforms designed to ship fast and scale cleanly.',
+    projects: ['MVP Development', 'SaaS Platforms', 'AI Products', 'Automation Systems'],
+  },
+  {
+    id: 'agencies',
+    title: 'Marketing & Agencies',
+    label: 'Marketing & Agencies',
+    summary: 'CRM, lead gen, and automation stacks that help agencies run campaigns at scale.',
+    projects: ['CRM Systems', 'Lead Generation Tools', 'WhatsApp Agents', 'Automation Platforms'],
+  },
+  {
+    id: 'realestate',
+    title: 'Real Estate',
+    label: 'Real Estate',
+    summary: 'Lead systems, CRM, virtual tours, and property discovery for developers and brokerages.',
+    projects: ['AI Lead Systems', 'CRM Platforms', 'Virtual Tours', 'Property Discovery Systems'],
+  },
+  {
+    id: 'manufacturing',
+    title: 'Manufacturing',
+    label: 'Manufacturing',
+    summary: 'CRM, automation, and reporting dashboards for production and internal operations.',
+    projects: ['CRM Systems', 'Business Automation', 'Reporting Dashboards', 'Internal Management Systems'],
+  },
+  {
+    id: 'education',
+    title: 'Education',
+    label: 'Education',
+    summary: 'Learning platforms, knowledge systems, and AI assistants for institutions and ed-tech.',
+    projects: ['Learning Platforms', 'Knowledge Systems', 'AI Assistants', 'Student Portals'],
+  },
 ];
 
 export const whatWeDo = {

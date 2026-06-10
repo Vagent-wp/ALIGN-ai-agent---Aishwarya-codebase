@@ -99,7 +99,7 @@ export const navMegaMenus: MegaMenuConfig[] = [
         links: [
           { label: 'Pharmaceutical', href: '/industries#pharma', description: 'SFA, DCR, doctor engagement' },
           { label: 'Manufacturing', href: '/industries#manufacturing', description: 'CRM, automation, dashboards' },
-          { label: 'Professional Services', href: '/industries#professional', description: 'Legal, HR, consulting firms' },
+          { label: 'Education', href: '/industries#education', description: 'Learning platforms, AI assistants' },
         ],
       },
       {

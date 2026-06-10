@@ -4,12 +4,31 @@ import { useLocation } from 'react-router-dom';
 /** Fixed marketing navbar (h-16) + breathing room */
 export const HASH_SCROLL_OFFSET = 88;
 
-export function scrollToSectionId(id: string, offset = HASH_SCROLL_OFFSET) {
+type ScrollToSectionOptions = {
+  force?: boolean;
+  behavior?: ScrollBehavior;
+};
+
+export function scrollToSectionId(
+  id: string,
+  offset = HASH_SCROLL_OFFSET,
+  options: ScrollToSectionOptions = {},
+) {
+  const { force = false, behavior = 'smooth' } = options;
+
   const attempt = (tries: number) => {
     const el = document.getElementById(id);
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      const rect = el.getBoundingClientRect();
+      const targetTop = rect.top + window.scrollY - offset;
+      const alreadyVisible =
+        rect.top >= offset - 16 &&
+        rect.top <= offset + 32 &&
+        rect.bottom <= window.innerHeight + 24;
+
+      if (!force && alreadyVisible) return;
+
+      window.scrollTo({ top: Math.max(0, targetTop), behavior });
       return;
     }
     if (tries < 20) {
@@ -24,6 +43,8 @@ type UseHashSectionOptions = {
   /** Only react to hash when pathname matches (e.g. `/services`) */
   pagePath?: string;
   scrollOffset?: number;
+  /** Scroll when the user picks a tab in-page. Default true. */
+  scrollOnSelect?: boolean;
 };
 
 /**
@@ -35,7 +56,7 @@ export function useHashSection(
   defaultId: string,
   options: UseHashSectionOptions = {},
 ) {
-  const { pagePath, scrollOffset = HASH_SCROLL_OFFSET } = options;
+  const { pagePath, scrollOffset = HASH_SCROLL_OFFSET, scrollOnSelect = true } = options;
   const location = useLocation();
 
   const resolveHash = useCallback(
@@ -65,9 +86,11 @@ export function useHashSection(
     (id: string, hashPath: string) => {
       setActiveId(id);
       window.history.replaceState(null, '', `${hashPath}#${id}`);
-      scrollToSectionId(id, scrollOffset);
+      if (scrollOnSelect) {
+        scrollToSectionId(id, scrollOffset);
+      }
     },
-    [scrollOffset],
+    [scrollOffset, scrollOnSelect],
   );
 
   return { activeId, setActiveId, selectSection };

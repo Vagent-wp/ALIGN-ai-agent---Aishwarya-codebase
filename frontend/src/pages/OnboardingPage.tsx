@@ -488,7 +488,7 @@ export function OnboardingPage() {
     <div className="flex h-[100dvh] flex-col overflow-hidden bg-background">
       <header className="glass shrink-0 border-b border-border/40 pt-safe">
         <div className="flex min-h-14 items-center justify-between px-4">
-          <AlignBrand variant="full" size="sm" linkToHome />
+          <AlignBrand variant="full" size="md" linkToHome />
           {completeness != null && (
             <span className="text-xs font-semibold text-primary">{completeness}% complete</span>
           )}

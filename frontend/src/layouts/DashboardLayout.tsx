@@ -9,7 +9,7 @@ export function DashboardLayout() {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border/60 bg-card">
         <div className="page-shell flex min-h-14 items-center justify-between py-3">
-          <AlignBrand variant="full" size="sm" linkToHome />
+          <AlignBrand variant="full" size="md" linkToHome />
           <Link
             to="/onboarding"
             className="rounded-full border border-primary/40 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5"

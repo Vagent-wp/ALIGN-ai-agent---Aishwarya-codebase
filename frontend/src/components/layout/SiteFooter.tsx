@@ -28,7 +28,7 @@ export function SiteFooter() {
       <div className="inv-container">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <AlignBrand variant="full" size="sm" surface="light" linkToHome />
+            <AlignBrand variant="full" size="footer" surface="light" linkToHome />
             <p className="inv-body-sm mt-4 max-w-xs">{BRAND.taglinePrimary}</p>
             <p className="mt-2 text-[13px] text-[var(--color-slate)]">
               {BRAND.platform} · Powered by {BRAND.assistant}

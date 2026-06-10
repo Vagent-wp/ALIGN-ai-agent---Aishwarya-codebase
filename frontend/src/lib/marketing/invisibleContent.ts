@@ -191,5 +191,5 @@ export const trustLogos = [
   'Manufacturing',
   'Education',
   'Events',
-  'Professional Services',
+  'Agencies',
 ];
