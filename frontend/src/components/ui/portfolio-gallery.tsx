@@ -72,8 +72,8 @@ export function PortfolioGallery({
     const linkClass = cn(
       'group inline-flex items-center gap-2 transition-all',
       isSection
-        ? 'h-11 rounded-full border-2 border-primary bg-white/80 px-6 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground'
-        : 'mb-20 gap-3 rounded-full bg-foreground px-6 py-3 font-medium text-background hover:bg-foreground/90'
+        ? 'linear-btn-pill'
+        : 'linear-btn-ghost mb-12 border border-[#23252a] px-6'
     );
 
     if (archiveButton.href.startsWith('http')) {
@@ -222,9 +222,9 @@ export function PortfolioGallery({
       <section
         aria-label={title}
         id="projects"
-        className={cn('marketing-section overflow-hidden bg-muted/30', className)}
+        className={cn('marketing-section overflow-hidden', className)}
       >
-        <div className="marketing-container">
+        <div className="marketing-container px-6">
           <div className="mx-auto mb-8 max-w-3xl text-center md:mb-10">
             <p className="marketing-eyebrow">Our Work</p>
             <h2 className="marketing-heading mt-3">{title}</h2>
@@ -232,8 +232,8 @@ export function PortfolioGallery({
             <div className="mt-6 flex justify-center">{renderArchiveLink()}</div>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-            <p className="hidden border-b border-border/60 px-6 py-3 text-center text-sm text-muted-foreground md:block">
+          <div className="linear-card overflow-hidden">
+            <p className="hidden border-b border-[#23252a] px-6 py-3 text-center text-sm text-[#8a8f98] md:block">
               Click a project to open its dashboard preview
             </p>
             {galleryCards}
@@ -244,15 +244,16 @@ export function PortfolioGallery({
   }
 
   return (
-    <section aria-label={title} id="projects" className={cn('relative px-4 py-20', className)}>
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl border border-border bg-background/50 backdrop-blur-sm">
-        <div className="relative z-10 px-8 pb-4 pt-16 text-center">
-          <h2 className="mb-8 text-balance font-poppins text-4xl font-bold text-foreground md:text-6xl">{title}</h2>
+    <section aria-label={title} id="projects" className={cn('relative px-6 py-10 md:py-16', className)}>
+      <div className="marketing-container overflow-hidden">
+        <div className="relative z-10 pb-4 pt-4 text-center md:pt-8">
+          <p className="marketing-eyebrow">Portfolio</p>
+          <h2 className="marketing-heading mt-3 mb-6">{title}</h2>
           {subtitle && <p className="marketing-subtitle mx-auto mb-8 max-w-2xl">{subtitle}</p>}
           {renderArchiveLink()}
         </div>
-        {galleryCards}
-        <div className="hidden h-48 md:block" aria-hidden />
+        <div className="linear-card overflow-hidden">{galleryCards}</div>
+        <div className="hidden h-32 md:block" aria-hidden />
       </div>
     </section>
   );

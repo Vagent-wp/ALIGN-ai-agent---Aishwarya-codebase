@@ -1,8 +1,8 @@
-/** Shared marketing navbar dimensions — keep hero overlap and mega menu top offsets in sync */
+/** Shared marketing navbar dimensions — Linear nav is 56px */
 export const MARKETING_NAV_HEIGHT = {
-  bar: 'min-h-16 sm:min-h-[4.75rem] md:min-h-20',
-  spacer: 'h-16 sm:h-[4.75rem] md:h-20',
-  top: 'top-16 sm:top-[4.75rem] md:top-20',
-  heroOverlap: '-mt-16 sm:-mt-[4.75rem] md:-mt-20',
-  heroMinHeight: 'lg:min-h-[calc(100vh-5rem)]',
+  bar: 'h-14',
+  spacer: 'h-14',
+  top: 'top-14',
+  heroOverlap: '',
+  heroMinHeight: 'min-h-[calc(100vh-3.5rem)]',
 } as const;

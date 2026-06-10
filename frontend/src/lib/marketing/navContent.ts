@@ -15,7 +15,7 @@ export const pastelFeatureCards: PastelFeatureCard[] = [
     title: 'Scale faster with AI agents & automation',
     body: 'WhatsApp AI, voice agents, lead qualification, CRM automation, and workflow systems — everything your team needs to move faster without losing quality.',
     cta: 'Explore AI solutions',
-    ctaHref: '/#services',
+    ctaHref: '/services#ai-agents',
     visual: 'cartoon-ai',
   },
   {
@@ -24,7 +24,7 @@ export const pastelFeatureCards: PastelFeatureCard[] = [
     title: 'Structured systems for every business role',
     body: 'Startups, agencies, and enterprises each get clear workspaces — dashboards, pipelines, analytics, and client portals without spreadsheet chaos.',
     cta: 'Explore platforms',
-    ctaHref: '/#products',
+    ctaHref: '/services#saas',
     visual: 'workflow-mockup',
   },
 ];
@@ -37,6 +37,8 @@ export interface MegaMenuColumn {
 export interface MegaMenuConfig {
   id: string;
   label: string;
+  /** Primary page — clicking the nav label navigates here */
+  href: string;
   columns: MegaMenuColumn[];
   featured?: { title: string; body: string; href: string; cta: string };
 }
@@ -45,37 +47,38 @@ export const navMegaMenus: MegaMenuConfig[] = [
   {
     id: 'services',
     label: 'Services',
+    href: '/services',
     columns: [
       {
         title: 'AI & Intelligence',
         links: [
-          { label: 'AI Agents & Solutions', href: '/#services', description: 'WhatsApp, voice, support, RAG assistants' },
-          { label: 'Computer Vision', href: '/#services', description: 'Face recognition, attendance, access control' },
-          { label: 'Data & Analytics', href: '/#services', description: 'Power BI, KPI monitoring, reporting' },
+          { label: 'AI Agents & Solutions', href: '/services#ai-agents', description: 'WhatsApp, voice, support, RAG assistants' },
+          { label: 'Computer Vision', href: '/services#cv', description: 'Face recognition, attendance, access control' },
+          { label: 'Data & Analytics', href: '/services#analytics', description: 'Power BI, KPI monitoring, reporting' },
         ],
       },
       {
         title: 'Automation & Platforms',
         links: [
-          { label: 'Automation Solutions', href: '/#services', description: 'Email, CRM, workflow, document processing' },
-          { label: 'SaaS Development', href: '/#services', description: 'MVPs, multi-tenant, subscription systems' },
-          { label: 'CRM & Business Systems', href: '/#services', description: 'Lead, sales, recruitment, pharma CRM' },
+          { label: 'Automation Solutions', href: '/services#automation', description: 'Email, CRM, workflow, document processing' },
+          { label: 'SaaS Development', href: '/services#saas', description: 'MVPs, multi-tenant, subscription systems' },
+          { label: 'CRM & Business Systems', href: '/services#crm', description: 'Lead, sales, recruitment, pharma CRM' },
         ],
       },
       {
         title: 'Web & Experience',
         links: [
-          { label: 'Web Development', href: '/#services', description: 'Corporate sites, landing pages, enterprise apps' },
-          { label: 'Progressive Web Apps', href: '/#services', description: 'Installable, offline, push notifications' },
-          { label: '3D & Virtual Experiences', href: '/#services', description: 'Virtual tours, product demos, presentations' },
+          { label: 'Web Development', href: '/services#web', description: 'Corporate sites, landing pages, enterprise apps' },
+          { label: 'Progressive Web Apps', href: '/services#pwa', description: 'Installable, offline, push notifications' },
+          { label: '3D & Virtual Experiences', href: '/services#3d', description: 'Virtual tours, product demos, presentations' },
         ],
       },
       {
         title: 'Industry Solutions',
         links: [
-          { label: 'Recruitment & HR Tech', href: '/#services', description: 'ATS, candidate portals, AI matching' },
-          { label: 'Pharma Technology', href: '/#services', description: 'SFA, DCR, e-detailing, doctor engagement' },
-          { label: 'Digital Marketing & Branding', href: '/#services', description: 'SEO, lead gen, logo & identity design' },
+          { label: 'Recruitment & HR Tech', href: '/services#recruitment', description: 'ATS, candidate portals, AI matching' },
+          { label: 'Pharma Technology', href: '/services#pharma', description: 'SFA, DCR, e-detailing, doctor engagement' },
+          { label: 'Digital Marketing & Branding', href: '/services#marketing', description: 'SEO, lead gen, logo & identity design' },
         ],
       },
     ],
@@ -89,69 +92,44 @@ export const navMegaMenus: MegaMenuConfig[] = [
   {
     id: 'industries',
     label: 'Industries',
+    href: '/industries',
     columns: [
       {
         title: 'Enterprise & Regulated',
         links: [
-          { label: 'Pharmaceutical', href: '/#industries' },
-          { label: 'Manufacturing', href: '/#industries' },
-          { label: 'Professional Services', href: '/#industries' },
+          { label: 'Pharmaceutical', href: '/industries#pharma', description: 'SFA, DCR, doctor engagement' },
+          { label: 'Manufacturing', href: '/industries#manufacturing', description: 'CRM, automation, dashboards' },
+          { label: 'Professional Services', href: '/industries#professional', description: 'Legal, HR, consulting firms' },
         ],
       },
       {
         title: 'Growth & Talent',
         links: [
-          { label: 'Recruitment & HR', href: '/#industries' },
-          { label: 'Startups & SaaS', href: '/#industries' },
-          { label: 'Marketing & Agencies', href: '/#industries' },
+          { label: 'Recruitment & HR', href: '/industries#recruitment', description: 'ATS, portals, AI matching' },
+          { label: 'Startups & SaaS', href: '/industries#startups', description: 'MVPs, platforms, AI products' },
+          { label: 'Marketing & Agencies', href: '/industries#agencies', description: 'CRM, lead gen, automation' },
         ],
       },
       {
         title: 'Markets & Media',
         links: [
-          { label: 'Real Estate', href: '/#industries' },
-          { label: 'Events & Media', href: '/#industries' },
-          { label: 'Education', href: '/#industries' },
+          { label: 'Real Estate', href: '/industries#realestate', description: 'CRM, virtual tours, lead systems' },
+          { label: 'Events & Media', href: '/industries#events', description: 'Registration, attendee CRM' },
+          { label: 'Education', href: '/industries#education', description: 'Learning platforms, AI assistants' },
         ],
       },
     ],
     featured: {
       title: 'See what we deliver',
       body: 'SFA systems, recruitment platforms, AI lead gen, CRM, and automation across sectors.',
-      href: '/#industries',
+      href: '/industries',
       cta: 'View industries',
-    },
-  },
-  {
-    id: 'products',
-    label: 'Products',
-    columns: [
-      {
-        title: 'ALIGN Ecosystem',
-        links: [
-          { label: 'ALIGN Network', href: '/#products', description: 'Business discovery & opportunity ecosystem' },
-          { label: 'Aishwarya AI', href: '/#products', description: 'Intelligent business matchmaking assistant' },
-        ],
-      },
-      {
-        title: 'Get started',
-        links: [
-          { label: 'Early Access', href: '/early-access', description: 'Join the ALIGN Network waitlist' },
-          { label: 'About Aishwarya', href: '/about', description: 'How our AI assistant works' },
-          { label: 'Contact Sales', href: '/contact', description: 'Discuss your project requirements' },
-        ],
-      },
-    ],
-    featured: {
-      title: 'Where Opportunities Find People.',
-      body: 'Connect founders, businesses, agencies, investors, and professionals in one intelligent network.',
-      href: '/early-access',
-      cta: 'Get early access',
     },
   },
 ];
 
 export const simpleNavLinks = [
+  { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },

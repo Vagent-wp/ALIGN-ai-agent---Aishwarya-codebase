@@ -5,14 +5,14 @@ import { howItWorksSteps, stats } from '@/lib/marketing/content';
 
 export function MissionSection() {
   return (
-    <section className="marketing-section pastel-card-mint">
-      <div className="marketing-container">
+    <section className="marketing-section">
+      <div className="marketing-container px-6">
         <motion.div
           className="mx-auto max-w-3xl text-center"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="marketing-eyebrow">Our Mission</p>
           <h2 className="marketing-heading mt-3">{BRAND.taglinePrimary}</h2>
@@ -28,13 +28,13 @@ export function MissionSection() {
 
 export function StatsBand() {
   return (
-    <section className="border-y border-border/60 bg-card py-10">
-      <div className="marketing-container">
+    <section className="border-y border-[#23252a] py-10">
+      <div className="marketing-container px-6">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="font-poppins text-xl font-bold tabular-nums text-primary sm:text-2xl">{stat.value}</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-wider text-muted-foreground sm:text-sm">
+              <p className="text-xl font-[510] tabular-nums text-[#f7f8f8] sm:text-2xl">{stat.value}</p>
+              <p className="mt-1 text-xs font-[510] uppercase tracking-wider text-[#62666d] sm:text-sm">
                 {stat.label}
               </p>
             </div>
@@ -47,8 +47,8 @@ export function StatsBand() {
 
 export function HowItWorksSection() {
   return (
-    <section className="marketing-section bg-background">
-      <div className="marketing-container">
+    <section className="marketing-section">
+      <div className="marketing-container px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p className="marketing-eyebrow">How It Works</p>
           <h2 className="marketing-heading mt-3">From idea to intelligent ecosystem</h2>
@@ -58,15 +58,15 @@ export function HowItWorksSection() {
           {howItWorksSteps.map((step, i) => (
             <motion.div
               key={step.step}
-              className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
+              className="linear-card-deep p-6"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="font-poppins text-3xl font-bold text-primary/30">{step.step}</span>
-              <h3 className="mt-2 font-poppins text-lg font-bold">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              <span className="linear-mono text-3xl text-[#5e6ad2]">{step.step}</span>
+              <h3 className="mt-2 text-lg font-[510] text-[#f7f8f8]">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#8a8f98]">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -77,19 +77,17 @@ export function HowItWorksSection() {
 
 export function FinalCTA() {
   return (
-    <section className="marketing-section bg-[#060612] text-white">
-      <div className="marketing-container text-center">
-        <h2 className="font-poppins text-3xl font-bold sm:text-4xl">
-          Ready to build your intelligent ecosystem?
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base text-slate-300 sm:text-lg">
+    <section className="marketing-section border-t border-[#23252a]">
+      <div className="marketing-container px-6 text-center">
+        <h2 className="linear-heading-lg">Ready to build your intelligent ecosystem?</h2>
+        <p className="linear-body-lg mx-auto mt-4 max-w-xl">
           Join {BRAND.platform} and discover how {BRAND.assistant} connects opportunities with the people who need them.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link to="/early-access" className="btn-marketing-primary min-w-[200px]">
-            Get Early Access
+          <Link to="/onboarding" className="linear-btn-primary min-w-[200px]">
+            Join ALIGN Network
           </Link>
-          <Link to="/contact" className="btn-marketing-outline-light min-w-[200px]">
+          <Link to="/contact" className="linear-btn-pill min-w-[200px]">
             Contact Us
           </Link>
         </div>

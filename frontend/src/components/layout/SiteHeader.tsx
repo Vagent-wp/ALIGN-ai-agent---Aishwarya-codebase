@@ -36,10 +36,10 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/early-access"
+              to="/onboarding"
               className="inline-flex h-9 items-center justify-center rounded-xl bg-primary px-4 text-xs font-semibold text-primary-foreground hover:bg-primary/90 sm:text-sm"
             >
-              Get Early Access
+              Join Network
             </Link>
           </nav>
         )}
@@ -73,11 +73,11 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/early-access"
+              to="/onboarding"
               onClick={() => setOpen(false)}
               className="touch-target mt-2 flex h-12 w-full items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground active:scale-[0.97]"
             >
-              Get Early Access
+              Join Network
             </Link>
           </div>
         </nav>

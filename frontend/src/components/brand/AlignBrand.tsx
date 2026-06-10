@@ -3,34 +3,86 @@ import { Link } from 'react-router-dom';
 import { BRAND, LOGO } from '@/lib/brand';
 
 interface AlignBrandProps {
-  /** Full wordmark image or icon-only mark */
+  /** Full wordmark (mark + divider + text) or icon-only mark */
   variant?: 'full' | 'icon';
   size?: 'sm' | 'md' | 'lg' | 'nav';
-  /** Show official expansion below logo (full variant only) */
+  /**
+   * dark — compose 1.png + 2.png (black PNG bg blends on dark nav)
+   * light — use merge.png (white background, for footer & light pages)
+   */
+  surface?: 'dark' | 'light';
   showExpansion?: boolean;
-  /** Show platform + assistant line below logo */
   showPlatformLine?: boolean;
   className?: string;
   linkToHome?: boolean;
 }
 
-const fullHeights = {
-  sm: 'h-8 md:h-9',
-  md: 'h-10 md:h-11',
-  lg: 'h-12 md:h-16 lg:h-[4.5rem]',
-  nav: 'h-12 w-auto sm:h-14 md:h-16 lg:h-[4.25rem]',
+const compositeHeights = {
+  sm: 'h-9',
+  md: 'h-11',
+  lg: 'h-14 md:h-16',
+  nav: 'h-10 sm:h-11 md:h-12',
 };
 
-const iconSizes = {
+const markOnlyHeights = {
   sm: 'h-8 w-8',
   md: 'h-10 w-10',
   lg: 'h-12 w-12',
-  nav: 'h-10 w-10 sm:h-11 sm:w-11',
+  nav: 'h-9 w-9 sm:h-10 sm:w-10',
 };
+
+const mergedHeights = {
+  sm: 'h-9 md:h-10',
+  md: 'h-11 md:h-12',
+  lg: 'h-14 md:h-[4.5rem]',
+  nav: 'h-10 sm:h-11 md:h-12',
+};
+
+function ComposedLogo({
+  size,
+  surface,
+}: {
+  size: NonNullable<AlignBrandProps['size']>;
+  surface: 'dark' | 'light';
+}) {
+  if (surface === 'light') {
+    return (
+      <img
+        src={LOGO.merged}
+        alt={`${BRAND.company} — ${BRAND.platform}`}
+        className={cn('w-auto max-w-[min(100%,260px)] object-contain object-left', mergedHeights[size])}
+        draggable={false}
+      />
+    );
+  }
+
+  return (
+    <div className={cn('flex items-center gap-2 sm:gap-2.5', compositeHeights[size])}>
+      <img
+        src={LOGO.mark}
+        alt=""
+        className="h-[88%] w-auto shrink-0 object-contain"
+        draggable={false}
+        aria-hidden
+      />
+      <span
+        className="h-[72%] w-px shrink-0 bg-[#d0d6e0]/35"
+        aria-hidden
+      />
+      <img
+        src={LOGO.wordmark}
+        alt={`${BRAND.company}`}
+        className="h-full w-auto max-w-[min(52vw,168px)] object-contain object-left sm:max-w-[190px] md:max-w-[210px]"
+        draggable={false}
+      />
+    </div>
+  );
+}
 
 export function AlignBrand({
   variant = 'full',
   size = 'md',
+  surface = 'light',
   showExpansion = false,
   showPlatformLine = false,
   className,
@@ -40,19 +92,13 @@ export function AlignBrand({
     <div className={cn('flex flex-col', className)}>
       {variant === 'icon' ? (
         <img
-          src={LOGO.icon}
+          src={LOGO.mark}
           alt={BRAND.company}
-          className={cn('object-contain', iconSizes[size])}
+          className={cn('object-contain', markOnlyHeights[size])}
+          draggable={false}
         />
       ) : (
-        <img
-          src={LOGO.full}
-          alt={`${BRAND.company} — ${BRAND.platform}`}
-          className={cn(
-            'w-auto max-w-[min(100%,240px)] object-contain object-left sm:max-w-[280px] md:max-w-none',
-            fullHeights[size]
-          )}
-        />
+        <ComposedLogo size={size} surface={surface} />
       )}
 
       {showExpansion && variant === 'full' && (
@@ -71,7 +117,10 @@ export function AlignBrand({
 
   if (linkToHome) {
     return (
-      <Link to="/" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg">
+      <Link
+        to="/"
+        className="inline-flex shrink-0 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
+      >
         {content}
       </Link>
     );

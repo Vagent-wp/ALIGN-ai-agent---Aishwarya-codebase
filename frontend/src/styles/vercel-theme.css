@@ -1,0 +1,445 @@
+/* Vercel — prismatic monolith layer (5% of marketing hybrid) */
+
+.marketing-vercel {
+  /* Colors */
+  --color-graphite: #171717;
+  --color-marble-white: #fafafa;
+  --color-pearl: #ffffff;
+  --color-hairline: #ebebeb;
+  --color-felt-gray: #4d4d4d;
+  --color-smoke: #666666;
+  --color-ash: #a8a8a8;
+  --color-fog: #7d7d7d;
+  --color-ice-tint: #f0fbff;
+  --color-carbon: #000000;
+  --color-prism-blue: #52aeff;
+  --color-prism-red: #e5484d;
+  --color-prism-teal: #45dec5;
+  --color-vercel-blue: #0070f3;
+
+  /* Typography — Geist substitute: Inter with tight tracking */
+  --font-geist: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-geist-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --text-caption: 12px;
+  --leading-caption: 1.5;
+  --text-body: 14px;
+  --leading-body: 1.56;
+  --text-heading-sm: 20px;
+  --leading-heading-sm: 1.33;
+  --text-heading: 24px;
+  --leading-heading: 1.25;
+  --text-heading-lg: 32px;
+  --leading-heading-lg: 1.2;
+  --text-display: 48px;
+  --leading-display: 1.17;
+
+  /* Spacing */
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+
+  /* Layout */
+  --vercel-page-max-width: 1200px;
+  --vercel-section-gap: 72px;
+  --vercel-card-padding: 24px;
+
+  /* Border Radius */
+  --radius-cards: 6px;
+  --radius-buttons: 6px;
+  --radius-pills: 9999px;
+
+  /* Shadows */
+  --shadow-card: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 2px 0px,
+    rgb(250, 250, 250) 0px 0px 0px 1px;
+
+  /* Surfaces */
+  --surface-canvas: #fafafa;
+  --surface-card: #ffffff;
+  --surface-wash: #f0fbff;
+
+  /* Prism gradient — decorative only */
+  --gradient-prism: conic-gradient(
+    from 180deg at 50% 70%,
+    transparent 0deg,
+    #eec32d 60deg,
+    #ec4b4b 120deg,
+    #709ab9 200deg,
+    #4dffbf 280deg,
+    transparent 360deg
+  );
+}
+
+/* ——— Section ——— */
+
+.vercel-section {
+  position: relative;
+  padding-top: var(--vercel-section-gap);
+  padding-bottom: var(--vercel-section-gap);
+  background-color: var(--color-marble-white);
+  color: var(--color-graphite);
+  font-family: var(--font-geist);
+  letter-spacing: -0.02em;
+  overflow: hidden;
+}
+
+.vercel-engineer-grid {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.35;
+}
+
+.vercel-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--vercel-page-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ——— Typography ——— */
+
+.vercel-display {
+  font-size: clamp(2rem, 5vw, var(--text-display));
+  font-weight: 500;
+  line-height: var(--leading-display);
+  letter-spacing: -0.06em;
+  color: var(--color-graphite);
+}
+
+.vercel-heading-lg {
+  font-size: clamp(1.5rem, 4vw, var(--text-heading-lg));
+  font-weight: 500;
+  line-height: var(--leading-heading-lg);
+  letter-spacing: -0.05em;
+  color: var(--color-graphite);
+}
+
+.vercel-heading {
+  font-size: var(--text-heading);
+  font-weight: 600;
+  line-height: var(--leading-heading);
+  letter-spacing: -0.05em;
+  color: var(--color-graphite);
+}
+
+.vercel-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--color-felt-gray);
+}
+
+.vercel-body-sm {
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  letter-spacing: -0.02em;
+  color: var(--color-felt-gray);
+}
+
+.vercel-highlight {
+  color: var(--color-vercel-blue);
+}
+
+/* ——— Buttons ——— */
+
+.vercel-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  padding: 8px 16px;
+  border-radius: var(--radius-buttons);
+  border: none;
+  background: var(--color-graphite);
+  color: var(--color-pearl);
+  font-size: var(--text-body);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: opacity 160ms ease;
+}
+
+.vercel-btn-primary:hover {
+  opacity: 0.88;
+}
+
+.vercel-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  padding: 8px 16px;
+  border-radius: var(--radius-buttons);
+  border: 1px solid var(--color-graphite);
+  background: transparent;
+  color: var(--color-graphite);
+  font-size: var(--text-body);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: background 160ms ease;
+}
+
+.vercel-btn-secondary:hover {
+  background: rgba(23, 23, 23, 0.04);
+}
+
+/* ——— Prism mark ——— */
+
+.vercel-prism-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  margin: var(--spacing-32) auto 0;
+}
+
+.vercel-prism-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: var(--gradient-prism);
+  opacity: 0.55;
+  filter: blur(24px);
+}
+
+.vercel-prism-triangle {
+  position: relative;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 34px solid var(--color-graphite);
+}
+
+/* ——— Category pills ——— */
+
+.vercel-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  justify-content: center;
+  margin-top: var(--spacing-48);
+}
+
+.vercel-filter-chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--color-hairline);
+  background: var(--color-pearl);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-graphite);
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.vercel-filter-chip-active {
+  background: var(--color-marble-white);
+  border-color: #d4d4d4;
+}
+
+/* ——— Feature cards ——— */
+
+.vercel-feature-grid {
+  display: grid;
+  gap: var(--spacing-24);
+  margin-top: var(--spacing-32);
+}
+
+@media (min-width: 768px) {
+  .vercel-feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.vercel-feature-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--vercel-card-padding);
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-hairline);
+  background: var(--color-pearl);
+}
+
+.vercel-feature-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  color: var(--color-graphite);
+  margin-bottom: var(--spacing-16);
+}
+
+.vercel-feature-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: -0.04em;
+  color: var(--color-graphite);
+}
+
+.vercel-feature-card-body {
+  margin-top: var(--spacing-8);
+  flex: 1;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--color-felt-gray);
+}
+
+.vercel-feature-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-top: var(--spacing-16);
+  margin-left: auto;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  color: var(--color-graphite);
+}
+
+/* ——— Code block ——— */
+
+.vercel-code-block {
+  margin-top: var(--spacing-48);
+  padding: var(--spacing-16) var(--spacing-24);
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-hairline);
+  background: #f5f5f5;
+  overflow-x: auto;
+}
+
+.vercel-code-block pre {
+  margin: 0;
+  font-family: var(--font-geist-mono);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.54;
+  letter-spacing: 0;
+  color: var(--color-graphite);
+}
+
+.vercel-code-keyword {
+  color: #7820bc;
+}
+
+.vercel-code-string {
+  color: #297a3a;
+}
+
+.vercel-code-property {
+  color: var(--color-vercel-blue);
+}
+
+.vercel-code-comment {
+  color: var(--color-ash);
+}
+
+/* ——— Stat strip ——— */
+
+.vercel-stat-strip {
+  margin-top: var(--spacing-64);
+  text-align: center;
+}
+
+.vercel-stat-value {
+  font-size: clamp(1.5rem, 4vw, var(--text-heading-lg));
+  font-weight: 500;
+  line-height: var(--leading-heading-lg);
+  letter-spacing: -0.05em;
+  color: var(--color-graphite);
+}
+
+.vercel-stat-label {
+  margin-top: var(--spacing-8);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-felt-gray);
+}
+
+/* ——— Dashboard preview ——— */
+
+.vercel-dashboard-preview {
+  margin-top: var(--spacing-32);
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-hairline);
+  background: var(--color-pearl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.vercel-dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-bottom: 1px solid var(--color-hairline);
+  background: var(--color-marble-white);
+}
+
+.vercel-dashboard-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-hairline);
+}
+
+.vercel-dashboard-title {
+  margin-left: var(--spacing-8);
+  font-family: var(--font-geist-mono);
+  font-size: 12px;
+  color: var(--color-smoke);
+}
+
+.vercel-dashboard-body {
+  padding: var(--spacing-16);
+}
+
+.vercel-dashboard-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-hairline);
+  margin-bottom: var(--spacing-8);
+  font-size: 13px;
+  color: var(--color-graphite);
+}
+
+.vercel-dashboard-row:last-child {
+  margin-bottom: 0;
+}
+
+.vercel-dashboard-row-highlight {
+  background: var(--color-ice-tint);
+  border-color: #d4e8f0;
+}
+
+.vercel-dashboard-row-meta {
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
+  color: var(--color-smoke);
+}

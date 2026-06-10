@@ -1,0 +1,449 @@
+/* ElevenLabs — parchment command terminal layer (10% of marketing hybrid) */
+
+.marketing-elevenlabs {
+  /* Colors */
+  --color-parchment-white: #fdfcfc;
+  --color-warm-sand: #f5f3f1;
+  --color-ash-border: #e5e5e5;
+  --color-midnight-ink: #000000;
+  --color-driftwood: #777169;
+  --color-fog: #a59f97;
+  --color-silver-mist: #b1b0b0;
+  --color-void-violet: #0447ff;
+  --color-ember-orange: #ff4704;
+
+  /* Typography */
+  --font-waldenburg: 'DM Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-waldenburgfh: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-geist-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --text-caption: 10px;
+  --leading-caption: 1.4;
+  --text-body: 16px;
+  --leading-body: 1.5;
+  --text-subheading: 18px;
+  --leading-subheading: 1.44;
+  --text-heading-sm: 20px;
+  --leading-heading-sm: 1.4;
+  --text-heading: 32px;
+  --leading-heading: 1.17;
+  --text-heading-lg: 36px;
+  --leading-heading-lg: 1.13;
+  --text-display: 48px;
+  --leading-display: 1.08;
+
+  /* Spacing */
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+
+  /* Layout */
+  --elevenlabs-page-max-width: 1200px;
+  --elevenlabs-section-gap: 96px;
+
+  /* Border Radius */
+  --radius-tabs: 20px;
+  --radius-tags: 14px;
+  --radius-cards: 20px;
+  --radius-pills: 9999px;
+  --radius-badges: 18px;
+  --radius-inputs: 4px;
+  --radius-cardlarge: 24px;
+
+  /* Shadows */
+  --shadow-elevated: rgba(0, 0, 0, 0.4) 0px 0px 1px 0px, rgba(0, 0, 0, 0.04) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.04) 0px 2px 4px 0px;
+  --shadow-button-ring: rgba(0, 0, 0, 0.06) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 1px 2px 0px,
+    rgba(0, 0, 0, 0.04) 0px 2px 4px 0px;
+  --shadow-inset-active: rgba(0, 0, 0, 0.075) 0px 0px 0px 0.5px inset;
+
+  /* Surfaces */
+  --surface-canvas: #fdfcfc;
+  --surface-card-surface: #f5f3f1;
+  --surface-elevated-card: #ffffff;
+}
+
+/* ——— Section ——— */
+
+.elevenlabs-section {
+  padding-top: var(--elevenlabs-section-gap);
+  padding-bottom: var(--elevenlabs-section-gap);
+  background-color: var(--color-parchment-white);
+  color: var(--color-midnight-ink);
+  font-family: var(--font-inter);
+  letter-spacing: 0.01em;
+}
+
+.elevenlabs-container {
+  max-width: var(--elevenlabs-page-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ——— Typography ——— */
+
+.elevenlabs-display {
+  font-family: var(--font-waldenburg);
+  font-size: clamp(2rem, 5vw, var(--text-display));
+  font-weight: 300;
+  line-height: var(--leading-display);
+  letter-spacing: -0.02em;
+  color: var(--color-midnight-ink);
+}
+
+.elevenlabs-heading {
+  font-family: var(--font-waldenburg);
+  font-size: clamp(1.75rem, 4vw, var(--text-heading-lg));
+  font-weight: 300;
+  line-height: var(--leading-heading-lg);
+  letter-spacing: -0.02em;
+  color: var(--color-midnight-ink);
+}
+
+.elevenlabs-body {
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--color-driftwood);
+}
+
+.elevenlabs-body-sm {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: var(--color-driftwood);
+}
+
+.elevenlabs-eyebrow {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: var(--color-driftwood);
+  margin-bottom: var(--spacing-16);
+}
+
+.elevenlabs-wordmark {
+  font-family: var(--font-waldenburgfh);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  color: var(--color-midnight-ink);
+}
+
+/* ——— Buttons ——— */
+
+.elevenlabs-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  min-height: 40px;
+  padding: 0 var(--spacing-16);
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--color-ash-border);
+  background: var(--color-midnight-ink);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 160ms ease;
+}
+
+.elevenlabs-btn-primary:hover {
+  opacity: 0.88;
+}
+
+.elevenlabs-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--color-ash-border);
+  background: var(--color-parchment-white);
+  color: var(--color-midnight-ink);
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: var(--shadow-button-ring);
+  transition: background 160ms ease;
+}
+
+.elevenlabs-btn-secondary:hover {
+  background: var(--color-warm-sand);
+}
+
+.elevenlabs-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--color-midnight-ink);
+  font-size: 15px;
+  font-weight: 400;
+  transition: color 160ms ease;
+}
+
+.elevenlabs-btn-ghost:hover {
+  color: var(--color-driftwood);
+}
+
+/* ——— Product panel ——— */
+
+.elevenlabs-product-panel {
+  margin-top: var(--spacing-48);
+  padding: var(--spacing-32) 0;
+  border-radius: var(--radius-cards);
+  background: var(--color-warm-sand);
+}
+
+.elevenlabs-tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  padding: 0 var(--spacing-32);
+  margin-bottom: var(--spacing-32);
+}
+
+.elevenlabs-tab {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-badges);
+  border: 1px solid var(--color-ash-border);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-midnight-ink);
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+
+.elevenlabs-tab-active {
+  background: var(--surface-elevated-card);
+  box-shadow: var(--shadow-inset-active);
+}
+
+/* ——— Voice orb carousel ——— */
+
+.elevenlabs-orb-carousel {
+  display: flex;
+  gap: var(--spacing-24);
+  padding: 0 var(--spacing-32) var(--spacing-8);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.elevenlabs-orb-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.elevenlabs-orb-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+  scroll-snap-align: start;
+}
+
+.elevenlabs-voice-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.elevenlabs-orb-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-midnight-ink);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.elevenlabs-orb-sublabel {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-driftwood);
+  text-align: center;
+}
+
+/* ——— Feature cards ——— */
+
+.elevenlabs-feature-grid {
+  display: grid;
+  gap: var(--spacing-16);
+  margin-top: var(--spacing-48);
+}
+
+@media (min-width: 768px) {
+  .elevenlabs-feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.elevenlabs-feature-card {
+  padding: var(--spacing-32);
+  border-radius: var(--radius-cards);
+  background: var(--color-warm-sand);
+}
+
+.elevenlabs-feature-card-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-midnight-ink);
+}
+
+.elevenlabs-feature-card-body {
+  margin-top: var(--spacing-8);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  color: var(--color-driftwood);
+}
+
+/* ——— Elevated UI preview card ——— */
+
+.elevenlabs-elevated-card {
+  border-radius: var(--radius-cards);
+  background: var(--surface-elevated-card);
+  padding: var(--spacing-16);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* ——— Dark mode inset ——— */
+
+.elevenlabs-dark-inset {
+  margin-top: var(--spacing-48);
+  border-radius: var(--radius-cardlarge);
+  background: #0a0a0a;
+  padding: var(--spacing-32);
+  overflow: hidden;
+}
+
+.elevenlabs-dark-inset-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-24);
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+}
+
+.elevenlabs-dark-inset-title {
+  font-family: var(--font-waldenburg);
+  font-size: var(--text-heading-sm);
+  font-weight: 300;
+  line-height: var(--leading-heading-sm);
+  letter-spacing: -0.02em;
+  color: #fdfcfc;
+}
+
+.elevenlabs-dark-inset-badge {
+  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-pills);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-fog);
+}
+
+.elevenlabs-dark-inset-body {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-fog);
+  max-width: 480px;
+}
+
+.elevenlabs-dark-preview {
+  margin-top: var(--spacing-24);
+  border-radius: var(--radius-cards);
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--spacing-20);
+}
+
+.elevenlabs-dark-preview-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-badges);
+  background: rgba(255, 255, 255, 0.04);
+  margin-bottom: var(--spacing-8);
+}
+
+.elevenlabs-dark-preview-row:last-child {
+  margin-bottom: 0;
+}
+
+.elevenlabs-dark-preview-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.elevenlabs-dark-preview-text {
+  font-size: 13px;
+  color: #e5e5e5;
+  font-weight: 400;
+}
+
+.elevenlabs-dark-preview-meta {
+  margin-left: auto;
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
+  color: var(--color-fog);
+}
+
+/* ——— Trust grid ——— */
+
+.elevenlabs-trust-card {
+  margin-top: var(--spacing-48);
+  padding: var(--spacing-32);
+  border-radius: var(--radius-cards);
+  background: var(--color-warm-sand);
+}
+
+.elevenlabs-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-24) var(--spacing-16);
+  margin-top: var(--spacing-24);
+}
+
+@media (min-width: 640px) {
+  .elevenlabs-trust-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .elevenlabs-trust-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.elevenlabs-trust-logo {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-driftwood);
+  text-align: center;
+  filter: grayscale(1);
+  opacity: 0.85;
+}

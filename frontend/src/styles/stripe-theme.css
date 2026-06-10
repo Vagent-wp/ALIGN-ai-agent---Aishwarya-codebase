@@ -1,0 +1,403 @@
+/* Stripe — violet horizon layer (25% of marketing hybrid) */
+
+.marketing-hybrid {
+  /* Stripe palette */
+  --color-electric-iris: #533afd;
+  --color-lumen-violet: #8087ff;
+  --color-midnight-ink: #061b31;
+  --color-stripe-steel: #50617a;
+  --color-stripe-slate: #64748d;
+  --color-pewter: #7d8ba4;
+  --color-stripe-fog: #3c4f69;
+  --color-stripe-mist: #e5edf5;
+  --color-stripe-snow: #f8fafd;
+  --color-paper: #ffffff;
+  --color-ember: #ff6118;
+  --color-solar: #ffbb00;
+  --color-periwinkle-tint: #e2e4ff;
+  --color-iris-glow: #d6d9fc;
+
+  --stripe-section-gap: 80px;
+  --stripe-radius: 4px;
+
+  --shadow-stripe-xl: rgba(0, 0, 0, 0.2) 0px 0px 32px 8px;
+  --shadow-stripe-dropdown: rgba(50, 50, 93, 0.12) 0px 16px 32px 0px;
+  --shadow-stripe-sm: rgba(23, 23, 23, 0.06) 0px 3px 6px 0px;
+
+  --gradient-dawn-bloom: radial-gradient(
+    circle at 70% 40%,
+    rgb(127, 125, 252) 0%,
+    rgb(244, 75, 204) 33%,
+    rgba(229, 237, 245, 0) 66%
+  );
+  --gradient-spectrum-veil: linear-gradient(
+    90deg,
+    rgb(114, 50, 241) 3.13%,
+    rgb(251, 118, 250) 50%,
+    rgb(255, 207, 94)
+  );
+  --gradient-text-hero: linear-gradient(135deg, #533afd 0%, #8087ff 40%, #50617a 100%);
+  --gradient-card-wash: linear-gradient(
+    0deg,
+    rgba(255, 97, 24, 0.15) 0%,
+    rgba(247, 45, 243, 0.12) 40%,
+    rgba(83, 58, 253, 0.08) 70%,
+    transparent 100%
+  );
+}
+
+/* ——— Section layouts ——— */
+
+.stripe-section {
+  padding-top: var(--stripe-section-gap);
+  padding-bottom: var(--stripe-section-gap);
+  background-color: var(--color-stripe-mist);
+  color: var(--color-midnight-ink);
+}
+
+.stripe-section-header {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.stripe-eyebrow {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-stripe-slate);
+  margin-bottom: 16px;
+}
+
+.stripe-heading-gradient {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.07;
+  letter-spacing: -0.025em;
+  background: var(--gradient-text-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stripe-heading-lg {
+  font-size: clamp(1.75rem, 4vw, 2.125rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-midnight-ink);
+}
+
+.stripe-body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-stripe-steel);
+}
+
+.stripe-body-sm {
+  font-size: 14px;
+  line-height: 1.43;
+  color: var(--color-stripe-steel);
+}
+
+/* ——— Hero halo (atmospheric, right edge) ——— */
+
+.stripe-hero-halo {
+  pointer-events: none;
+  position: absolute;
+  top: -10%;
+  right: -15%;
+  width: min(70vw, 720px);
+  height: min(70vw, 720px);
+  background: radial-gradient(
+    circle at 60% 50%,
+    rgba(83, 58, 253, 0.45) 0%,
+    rgba(247, 45, 243, 0.25) 30%,
+    rgba(255, 97, 24, 0.12) 50%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  opacity: 0.9;
+}
+
+.stripe-gradient-text {
+  background: linear-gradient(135deg, #533afd 0%, #8087ff 35%, #8a8f98 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ——— Buttons ——— */
+
+.stripe-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 12px 16px;
+  border-radius: var(--stripe-radius);
+  background: var(--color-electric-iris);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  transition: background 160ms ease;
+}
+
+.stripe-btn-primary:hover {
+  background: color-mix(in srgb, var(--color-electric-iris) 90%, white);
+}
+
+.stripe-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 12px 16px;
+  border-radius: var(--stripe-radius);
+  border: 1px solid var(--color-midnight-ink);
+  background: transparent;
+  color: var(--color-midnight-ink);
+  font-size: 14px;
+  font-weight: 400;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.stripe-btn-secondary:hover {
+  background: var(--color-midnight-ink);
+  color: #ffffff;
+}
+
+/* ——— Product showcase card ——— */
+
+.stripe-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--stripe-radius);
+  border: 1px solid var(--color-stripe-mist);
+  background: var(--color-paper);
+  padding: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-stripe-sm);
+}
+
+.stripe-product-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: var(--gradient-card-wash);
+  pointer-events: none;
+}
+
+.stripe-product-card-mockup {
+  position: relative;
+  z-index: 1;
+  margin: -8px -8px 16px;
+  border-radius: var(--stripe-radius);
+  box-shadow: var(--shadow-stripe-xl);
+  overflow: hidden;
+}
+
+.stripe-product-card-title {
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  color: var(--color-midnight-ink);
+}
+
+.stripe-product-card-body {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-stripe-steel);
+}
+
+/* ——— Enterprise trust ——— */
+
+.stripe-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 48px 60px;
+}
+
+.stripe-trust-logo {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-pewter);
+  filter: grayscale(1);
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+/* ——— Pricing ——— */
+
+.stripe-pricing-grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .stripe-pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stripe-pricing-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--stripe-radius);
+  border: 1px solid var(--color-stripe-mist);
+  background: var(--color-paper);
+  padding: 24px;
+  box-shadow: var(--shadow-stripe-sm);
+}
+
+.stripe-pricing-card-featured {
+  border-color: var(--color-iris-glow);
+  background: linear-gradient(180deg, var(--color-paper) 0%, var(--color-stripe-snow) 100%);
+  box-shadow: var(--shadow-stripe-dropdown);
+}
+
+.stripe-pricing-tier {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-stripe-slate);
+}
+
+.stripe-pricing-price {
+  margin-top: 8px;
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: -0.68px;
+  line-height: 1.15;
+  color: var(--color-midnight-ink);
+}
+
+.stripe-pricing-period {
+  font-size: 14px;
+  color: var(--color-pewter);
+}
+
+.stripe-pricing-features {
+  margin-top: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stripe-pricing-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.43;
+  color: var(--color-stripe-steel);
+}
+
+.stripe-pricing-feature::before {
+  content: '';
+  margin-top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-electric-iris);
+  flex-shrink: 0;
+}
+
+/* ——— Footer ——— */
+
+.stripe-footer {
+  background: var(--color-paper);
+  border-top: 1px solid var(--color-stripe-mist);
+  color: var(--color-midnight-ink);
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.stripe-footer-heading {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-midnight-ink);
+  margin-bottom: 16px;
+}
+
+.stripe-footer-link {
+  font-size: 14px;
+  color: var(--color-pewter);
+  transition: color 160ms ease;
+}
+
+.stripe-footer-link:hover {
+  color: var(--color-midnight-ink);
+}
+
+/* ——— Light surfaces: prevent dark-theme text bleed from .marketing-linear ——— */
+
+.marketing-linear .stripe-section,
+.marketing-linear .stripe-footer {
+  color: var(--color-midnight-ink);
+}
+
+.marketing-linear .stripe-section .marketing-heading {
+  color: var(--color-midnight-ink);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.marketing-linear .stripe-section .marketing-heading.stripe-gradient-text,
+.marketing-linear .stripe-section .stripe-heading-gradient {
+  background: var(--gradient-text-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.marketing-linear .stripe-section .marketing-eyebrow,
+.marketing-linear .stripe-section .stripe-eyebrow {
+  color: var(--color-stripe-slate);
+}
+
+.marketing-linear .stripe-section .marketing-subtitle,
+.marketing-linear .stripe-section .stripe-body,
+.marketing-linear .stripe-section .stripe-body-sm {
+  color: var(--color-stripe-steel);
+}
+
+.marketing-linear .stripe-section .stripe-trust-logo {
+  color: var(--color-stripe-fog);
+  filter: none;
+  opacity: 1;
+  font-weight: 500;
+}
+
+.marketing-linear .perplexity-section {
+  color: #27251e;
+}
+
+.marketing-linear .elevenlabs-section {
+  color: #000000;
+}
+
+.marketing-linear .vercel-section {
+  color: #171717;
+}

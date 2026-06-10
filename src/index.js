@@ -8,6 +8,8 @@ import { logger } from './utils/logger.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { verifyWebhook, receiveWebhook } from './webhook/webhookHandler.js';
 import onboardingApi from './routes/onboardingApi.js';
+import adminApi from './routes/adminApi.js';
+import echoApi from './routes/echoApi.js';
 
 // ============================================================
 // CATCH ALL UNHANDLED ERRORS
@@ -91,6 +93,8 @@ app.get('/api/status', (req, res) => {
 });
 
 app.use('/api/onboarding', onboardingApi);
+app.use('/api/admin', adminApi);
+app.use('/api/echo', echoApi);
 
 // ============================================================
 // 404 & ERROR HANDLERS

@@ -1,18 +1,27 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { MarketingNavbar } from '@/components/marketing/MarketingNavbar';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { EchoWidget } from '@/components/echo/EchoWidget';
 
 export function PublicLayout() {
-  const { pathname } = useLocation();
-  const isLanding = pathname === '/';
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash === '#industries') {
+      navigate(`/industries${location.hash}`, { replace: true });
+    }
+  }, [location.pathname, location.hash, navigate]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <MarketingNavbar heroOverlay={isLanding} />
+    <div className="marketing-hybrid marketing-linear marketing-perplexity marketing-elevenlabs marketing-vercel flex min-h-screen flex-col">
+      <MarketingNavbar />
       <main className="flex-1">
         <Outlet />
       </main>
       <SiteFooter />
+      <EchoWidget />
     </div>
   );
 }

@@ -1,3 +1,10 @@
+@import './styles/linear-theme.css';
+@import './styles/stripe-theme.css';
+@import './styles/perplexity-theme.css';
+@import './styles/elevenlabs-theme.css';
+@import './styles/vercel-theme.css';
+@import './styles/echo-widget.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -145,7 +152,7 @@
   }
 
   .marketing-heading {
-    @apply font-poppins text-3xl font-bold tracking-tight sm:text-4xl;
+    @apply font-sans text-3xl font-normal tracking-tight sm:text-4xl;
   }
 
   .marketing-subtitle {

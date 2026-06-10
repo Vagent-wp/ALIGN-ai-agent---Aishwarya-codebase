@@ -1,25 +1,20 @@
 import { motion } from 'framer-motion';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
-import { CartoonEcosystem } from '@/components/marketing/illustrations/CartoonIllustrations';
+import { LinearHeroMockup } from '@/components/marketing/linear/LinearHeroMockup';
 import { whatWeDo } from '@/lib/marketing/content';
 
 export function WhatWeDoSection() {
   return (
-    <section className="marketing-section bg-background">
-      <div className="marketing-container">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <section className="marketing-section">
+      <div className="marketing-container px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <SectionHeader
-              eyebrow="What We Do"
-              title={whatWeDo.headline}
-              subtitle={whatWeDo.body}
-              align="left"
-            />
+            <SectionHeader eyebrow="What We Do" title={whatWeDo.headline} subtitle={whatWeDo.body} align="left" />
           </motion.div>
 
           <motion.div
@@ -27,11 +22,9 @@ export function WhatWeDoSection() {
             initial={{ opacity: 0, x: 16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="pastel-card-sky w-full max-w-sm rounded-3xl p-6 sm:max-w-md sm:p-8">
-              <CartoonEcosystem className="mx-auto h-auto w-full max-w-[280px]" />
-            </div>
+            <LinearHeroMockup className="w-full max-w-md" />
           </motion.div>
         </div>
       </div>

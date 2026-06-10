@@ -39,10 +39,10 @@ export function HeroSection() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
-              to="/early-access"
+              to="/onboarding"
               className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-primary px-8 text-base font-bold text-primary-foreground hover:bg-primary/90 active:scale-[0.97] sm:w-auto"
             >
-              Get Early Access
+              Join ALIGN Network
             </Link>
             <Link
               to="/about"

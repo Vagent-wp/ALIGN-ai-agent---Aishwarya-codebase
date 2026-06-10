@@ -36,9 +36,13 @@ export const config = {
   security: {
     encryptionKey: required('ENCRYPTION_KEY'),
   },
+  admin: {
+    email: process.env.ADMIN_EMAIL || 'admin@align.network',
+    password: process.env.ADMIN_PASSWORD || '',
+  },
   agent: {
     name: process.env.AGENT_NAME || 'Aishwarya',
-    appName: process.env.APP_NAME || 'StartupHub AI',
+    appName: process.env.APP_NAME || 'ALIGN Network',
     maxSearchResults: parseInt(process.env.MAX_SEARCH_RESULTS || '50'),
     shownResultsCount: parseInt(process.env.SHOWN_RESULTS_COUNT || '3'),
     sessionTimeoutMinutes: parseInt(process.env.SESSION_TIMEOUT_MINUTES || '30'),

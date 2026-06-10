@@ -107,7 +107,7 @@ function mapFormToDbFields(form) {
     collaboration_style: form.collaboration_style || null,
     not_looking_for: form.not_looking_for || [],
     onboarding_step: form.onboarding_step ?? 0,
-    web_onboarded: form.onboarding_completed ?? false,
+    web_onboarded: true,
     onboarding_completed: form.onboarding_completed ?? false,
   };
 }

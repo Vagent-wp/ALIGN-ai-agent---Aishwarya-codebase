@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
 import { NetworkDashboardMockup, AishwaryaChatMockup } from '@/components/marketing/mockups/ProductMockups';
-import { CartoonRobot } from '@/components/marketing/illustrations/CartoonIllustrations';
 import { flagshipProducts } from '@/lib/marketing/content';
 
 export function FlagshipProductsSection() {
@@ -10,7 +9,7 @@ export function FlagshipProductsSection() {
 
   return (
     <section id="products" className="marketing-section scroll-mt-20">
-      <div className="marketing-container">
+      <div className="marketing-container px-6">
         <SectionHeader
           eyebrow="Flagship Products"
           title="The ALIGN ecosystem"
@@ -24,17 +23,14 @@ export function FlagshipProductsSection() {
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h3 className="font-poppins text-2xl font-bold sm:text-3xl">{network.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-muted-foreground">{network.subtitle}</p>
-                <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Connects</p>
+                <h3 className="linear-heading-lg text-2xl sm:text-3xl">{network.title}</h3>
+                <p className="linear-body-lg mt-3">{network.subtitle}</p>
+                <p className="mt-4 text-sm font-[510] uppercase tracking-wider text-[#62666d]">Connects</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {network.connects?.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground/85"
-                    >
+                    <span key={item} className="linear-status-pill border border-[#23252a] bg-[#161718]">
                       {item}
                     </span>
                   ))}
@@ -45,10 +41,11 @@ export function FlagshipProductsSection() {
                 initial={{ opacity: 0, x: 16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="overflow-hidden rounded-2xl shadow-md ring-1 ring-black/[0.06]"
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <NetworkDashboardMockup className="h-auto w-full" />
+                <div className="linear-card overflow-hidden p-2">
+                  <NetworkDashboardMockup className="h-auto w-full rounded-md" />
+                </div>
               </motion.div>
             </div>
           )}
@@ -60,10 +57,10 @@ export function FlagshipProductsSection() {
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="overflow-hidden rounded-2xl shadow-md ring-1 ring-black/[0.06]">
-                  <AishwaryaChatMockup className="h-auto w-full" />
+                <div className="linear-card overflow-hidden p-2">
+                  <AishwaryaChatMockup className="h-auto w-full rounded-md" />
                 </div>
               </motion.div>
 
@@ -72,28 +69,26 @@ export function FlagshipProductsSection() {
                 initial={{ opacity: 0, x: 16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="pastel-card-lavender mb-6 hidden w-32 rounded-2xl p-3 sm:block">
-                  <CartoonRobot className="h-auto w-full" />
-                </div>
-                <h3 className="font-poppins text-2xl font-bold sm:text-3xl">{aishwarya.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-muted-foreground">{aishwarya.subtitle}</p>
-                <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Capabilities</p>
+                <h3 className="linear-heading-lg text-2xl sm:text-3xl">{aishwarya.title}</h3>
+                <p className="linear-body-lg mt-3">{aishwarya.subtitle}</p>
+                <p className="mt-4 text-sm font-[510] uppercase tracking-wider text-[#62666d]">Capabilities</p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                   {aishwarya.capabilities?.map((cap) => (
-                    <li key={cap} className="text-sm text-foreground/85 before:mr-2 before:content-['·']">
+                    <li key={cap} className="text-sm text-[#d0d6e0] before:mr-2 before:text-[#5e6ad2] before:content-['·']">
                       {cap}
                     </li>
                   ))}
                 </ul>
                 {aishwarya.example && (
-                  <div className="mt-6 rounded-2xl border border-border/60 bg-card p-4 text-sm">
-                    <p className="text-muted-foreground">
-                      <span className="font-semibold text-foreground">You:</span> {aishwarya.example.user}
+                  <div className="linear-card-deep mt-6 p-4 text-sm">
+                    <p className="text-[#8a8f98]">
+                      <span className="font-[510] text-[#f7f8f8]">You:</span> {aishwarya.example.user}
                     </p>
-                    <p className="mt-2 text-muted-foreground">
-                      <span className="font-semibold text-primary">{aishwarya.title}:</span> {aishwarya.example.assistant}
+                    <p className="mt-2 text-[#8a8f98]">
+                      <span className="font-[510] text-[#5e6ad2]">{aishwarya.title}:</span>{' '}
+                      {aishwarya.example.assistant}
                     </p>
                   </div>
                 )}
